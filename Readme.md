@@ -1,4 +1,4 @@
-#AWS Lambda the CLI Way
+# AWS Lambda the CLI Way
 
 This tutorial walks through setting up AWS CLI, dependencies for AWS Lambda, getting your first Lambda function running, 
 many of its important features & finally integrating with other AWS services. The objective is to understand AWS Lambda 
