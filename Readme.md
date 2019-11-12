@@ -41,7 +41,7 @@ You will find the following tutorials covering all these.
 * [Prerequisites and Setup](docs/01-aws-cli-installation.md)
 * [IAM Account For Tutorial](docs/02-iam-account-setup.md)
 * [Hello World - Your First Lambda](docs/03-hello-world-your-first-lambda.md)
-* [Packaging With Dependencies]
+* [Packaging With Dependencies](docs/04-packaging-lambda-with-dependencies.md)
 * [Lambda Layers]
 * [Version Your Function]
 * [Managing Your Functions]
@@ -49,7 +49,7 @@ You will find the following tutorials covering all these.
 * [Integrate with Kinesis]
 * [Integrate with DynamoDB]
 * [Integrate with APIGateway]
-* [Tear down]
+* [Tear down]``
 
 ## References
 - [AWS Lambda](https://aws.amazon.com/lambda/)

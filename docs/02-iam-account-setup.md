@@ -10,7 +10,7 @@ This will enable `lambda-cli-user` to perform operations specific to AWS Lambda.
 
 > Note: It is assumed that you have the admin AWS user configured for performing CLI activities, related to IAM.
 
-####(1) Create IAM  user
+#### (1) Create IAM  user
 ```
 ➜  export AWS_IAM_USER=lambda-cli-user
 ➜  aws iam create-user --user-name ${AWS_IAM_USER}
@@ -28,7 +28,7 @@ This will enable `lambda-cli-user` to perform operations specific to AWS Lambda.
 }
 ```
 
-####(2) Create login profile 
+#### (2) Create login profile 
 Create a login profile and set the password. This will enable the CLI access for th IAM user.
 This command specifies that the user need not reset their password after creation. 
 
@@ -53,7 +53,7 @@ source a simple shell script to set the `AWS_IAM_PASSWORD` environment variable.
 }
 ```
 
-####(3) Create access key and secret key
+#### (3) Create access key and secret key
 Create active access key and secret key combination for the IAM user. It is advised to keep a note of 
 the Access Key and Secret key returned in response.
 
@@ -74,7 +74,7 @@ the Access Key and Secret key returned in response.
 ```
 
 
-####(4) Grant AWS Lambda permissions to IAM user
+#### (4) Grant AWS Lambda permissions to IAM user
 We will attach the `AWSLambdaFullAccess` policy to the `lambda-cli-user` user. This policy grants 
 a lot more permissions, beyond permissions for executing basic lambda functions. 
 We will need those permissions for the upcoming integration tasks with S3, DynamoDB, Kinesis etc., 
@@ -100,7 +100,7 @@ To ensure the role got attached to the user, you can list the user's attached po
 }
 ``` 
 
-####(5) Add IAM user configuration to CLI config
+#### (5) Add IAM user configuration to CLI config
 - Add the following entry to `~/.aws/credentials` _(replace the values with the values you got from Step 3 above)_
 ```
 [default]
@@ -116,7 +116,7 @@ aws_secret_access_key = AbcdEF1ghijK+lMNOPQ2+Rs3ST4uvwXyzaBcde5f
 region = us-east-1
 ```
 
-####(6) List AWS Lambda functions using IAM User
+#### (6) List AWS Lambda functions using IAM User
 At this point you should be able to use the IAM user for performing AWS Lambda related operations. 
 We will set the AWS_PROFILE to `lambda-cli-user` and user `aws lambda` cli.
 
