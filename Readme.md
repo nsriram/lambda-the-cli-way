@@ -1,13 +1,14 @@
 # AWS Lambda the CLI Way
 
+The objective of this tutorial is to understand AWS Lambda in-depth, beyond executing functions, using CLI. 
 This tutorial walks through setting up AWS CLI, dependencies for AWS Lambda, getting your first Lambda function running, 
-many of its important features & finally integrating with other AWS services. The objective is to understand AWS Lambda 
-in-depth, beyond executing functions. AWS CLI (Command Line Interface) will be the primary medium of demonstrating all these examples.
+many of its important features & finally integrating with other AWS services. AWS CLI (Command Line Interface) will be 
+the primary medium of demonstrating all these examples.
 
 ## Target Audience
 Target audience for this tutorial series are developers comfortable using AWS CLI. 
 A little background understanding of serverless will help. 
-The tutorial will not discuss examples using the AWS website UI.     
+> Note : The tutorial will not discuss examples using the AWS website UI.     
 
 ## Serverless Introduction
 Serverless computing has become a mainstream architectural option for building software today. 
@@ -37,7 +38,8 @@ You will find the following tutorials covering all these.
 
 ## Tutorials
 
-* [Prerequisites and Setup](docs/01-prerequisites-and-setup.md)
+* [Prerequisites and Setup](docs/01-aws-cli-installation.md)
+* [IAM Account For Tutorial](docs/02-iam-account-setup.md)
 * [IAM Roles and Policies]
 * [Hello World]
 * [Packaging With Dependencies]
