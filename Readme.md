@@ -40,8 +40,7 @@ You will find the following tutorials covering all these.
 
 * [Prerequisites and Setup](docs/01-aws-cli-installation.md)
 * [IAM Account For Tutorial](docs/02-iam-account-setup.md)
-* [IAM Roles and Policies]
-* [Hello World]
+* [Hello World - Your First Lambda](docs/03-hello-world-your-first-lambda.md)
 * [Packaging With Dependencies]
 * [Lambda Layers]
 * [Version Your Function]
@@ -60,3 +59,5 @@ You will find the following tutorials covering all these.
 - [KNative](https://cloud.google.com/knative/)
 - [Kubeless](https://kubeless.io/)
 - [Serverless](https://serverless.com/)  
+
+**Next**: [Prerequisites and Setup](docs/01-aws-cli-installation.md)

@@ -12,8 +12,8 @@ This will enable `lambda-cli-user` to perform operations specific to AWS Lambda.
 
 ####(1) Create IAM  user
 ```
-export AWS_IAM_USER=lambda-cli-user
-aws iam create-user --user-name ${AWS_IAM_USER}
+➜  export AWS_IAM_USER=lambda-cli-user
+➜  aws iam create-user --user-name ${AWS_IAM_USER}
 ```
 > output
 ```
@@ -129,3 +129,5 @@ You should see an output listing empty list of functions, or the ones your IAM u
 
 
 🏁 **Congrats !** You got your AWS IAM User created and granted the user permissions to use AWS Lambda. 🏁
+
+**Next**: [Hello World - Your First Lambda](03-hello-world-your-first-lambda.md)
