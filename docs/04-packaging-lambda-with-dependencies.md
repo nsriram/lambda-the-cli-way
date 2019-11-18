@@ -70,6 +70,4 @@ You should see the following output of executing the lambda function.
 
 🏁 **Congrats !** You deployed your first AWS Lambda function with its dependencies and invoked it successfully. 🏁
 
-**Next**: [Packaging With Dependencies](04-packaging-lambda-with-dependencies.md)
-
- 
+**Next**: [Lambda Layers](docs/05-lambda-layers.md)
