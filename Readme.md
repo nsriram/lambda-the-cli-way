@@ -42,13 +42,14 @@ You will find the following tutorials covering all these.
 * [IAM Account For Tutorial](docs/02-iam-account-setup.md)
 * [Hello World - Your First Lambda](docs/03-hello-world-your-first-lambda.md)
 * [Packaging With Dependencies](docs/04-packaging-lambda-with-dependencies.md)
-* [Lambda Layers]
+* [Lambda Layers](docs/05-lambda-layers.md)
 * [Version Your Function]
 * [Managing Your Functions]
 * [Integrate with S3]
 * [Integrate with Kinesis]
 * [Integrate with DynamoDB]
 * [Integrate with APIGateway]
+* [SAM CLI]
 * [Tear down]``
 
 ## References

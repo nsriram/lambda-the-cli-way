@@ -91,6 +91,7 @@ lambda file, the role ARN for the IAM created, the `lambda-cli-user` profile
 
 ```
 ➜  export AWS_REGION=us-east-1
+➜  export AWS_PROFILE=lambda-cli-user
 ➜  aws lambda create-function \
        --region "$AWS_REGION" \
        --function-name helloLambdaCLIWorld \
