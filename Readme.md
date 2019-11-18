@@ -43,7 +43,7 @@ You will find the following tutorials covering all these.
 * [Hello World - Your First Lambda](docs/03-hello-world-your-first-lambda.md)
 * [Packaging With Dependencies](docs/04-packaging-lambda-with-dependencies.md)
 * [Lambda Layers](docs/05-lambda-layers.md)
-* [Version Lambda](docs/06-version-lambda)
+* [Version Lambda](docs/06-version-lambda.md)
 * [Managing Your Functions]
 * [Integrate with S3]
 * [Integrate with Kinesis]
