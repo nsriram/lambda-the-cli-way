@@ -37,7 +37,7 @@ Here, we will bundle the source file with its `node_module` dependencies. The co
 is the artifact to be deployed.
  
 ```
-zip -r /tmp/formatCurrencyLambda.js.zip node_modules formatCurrencyLambda.js
+➜  zip -r /tmp/formatCurrencyLambda.js.zip node_modules formatCurrencyLambda.js
 ```
 
 #### (5) Deploy the lambda with dependencies

@@ -2,8 +2,8 @@
 
 This section explains how to version the lambda code. We will use the `helloLambdaCLIWorld.js` lambda to version from (3).
 
-### (1) Publish Version for helloLambdaCLIWorld
-Lets first version the current `helloLambdaCLIWorld` lambda code. Following command will do that
+#### (1) Publish Version for helloLambdaCLIWorld
+Lets version the `helloLambdaCLIWorld` lambda.
 
 ```
 aws lambda publish-version \
@@ -85,10 +85,10 @@ We can invoke both version 1 and version 2 as below.
 
 ```
 # Invoke version 1
-➜  aws lambda invoke --function-name helloLambdaCLIWorld --qualifier 1 --log-type Tail --payload '{}' outputfile.txt
+➜  aws lambda invoke --function-name helloLambdaCLIWorld --profile "$AWS_PROFILE" --qualifier 1 --log-type Tail --payload '{}' outputfile.txt
 
 # Invoke version 2
-➜  aws lambda invoke --function-name helloLambdaCLIWorld --qualifier 2 --log-type Tail --payload '{}' outputfile.txt
+➜  aws lambda invoke --function-name helloLambdaCLIWorld --profile "$AWS_PROFILE" --qualifier 2 --log-type Tail --payload '{}' outputfile.txt
 
 ```
 
@@ -105,4 +105,4 @@ The output will be as below, accordingly (`cat output.txt`).
 
 🏁 **Congrats !** You versioned your Lambda functions, listed them and invoked specific versions successfully. 🏁
 
-**Next**: [Managing Your Functions](07-managing-your-functions.md)
+**Next**: [Managing Your Lambda](07-managing-lambda.md)

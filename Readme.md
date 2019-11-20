@@ -44,13 +44,13 @@ You will find the following tutorials covering all these.
 * [Packaging With Dependencies](docs/04-packaging-lambda-with-dependencies.md)
 * [Lambda Layers](docs/05-lambda-layers.md)
 * [Version Lambda](docs/06-version-lambda.md)
-* [Managing Your Functions]
-* [Integrate with S3]
+* [Managing Lambda](docs/07-managing-lambda.md)
+* [Integrate with S3](docs/08-integrate-with-s3.md)
 * [Integrate with Kinesis]
 * [Integrate with DynamoDB]
 * [Integrate with APIGateway]
 * [SAM CLI]
-* [Tear down]``
+* [Tear down]
 
 ## References
 - [AWS Lambda](https://aws.amazon.com/lambda/)
