@@ -46,7 +46,7 @@ You will find the following tutorials covering all these.
 * [Version Lambda](docs/06-version-lambda.md)
 * [Managing Lambda](docs/07-managing-lambda.md)
 * [Integrate with S3](docs/08-integrate-with-s3.md)
-* [Integrate with Kinesis]
+* [Integrate with Kinesis](docs/09-integrate-with-kinesis.md)
 * [Integrate with DynamoDB]
 * [Integrate with APIGateway]
 * [SAM CLI]
