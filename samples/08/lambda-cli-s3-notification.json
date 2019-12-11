@@ -1,0 +1,7 @@
+{
+  "LambdaFunctionConfigurations": [{
+     "Id": "lambdaclis3notificationid",
+     "LambdaFunctionArn": "arn:aws:lambda:us-east-1:919191919191:function:s3ObjectListenerLambda",
+     "Events": ["s3:ObjectCreated:*"]
+  }]
+}

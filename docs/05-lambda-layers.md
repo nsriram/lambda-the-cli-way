@@ -67,7 +67,7 @@ We will publish the lambda layer under MIT license. We are not using S3, but dir
     "LayerArn": "arn:aws:lambda:<AWS_REGION>:<AWS_ACCOUNT_ID>:layer:momentjs-lambda-layer",
     "Content": {
         "CodeSize": 743941,
-        "CodeSha256": "nakCb8UDFbyzPrbcCde4xRK9K5EZ5MiPZxW49kl3AGI=",
+        "CodeSha256": "aBcDEeFG1H2IjKlM3nOPQrS4Tuv5W6xYZaB+7CdEf8g=",
         "Location": "https://awslambda-ap-se-1-layers.s3.<AWS_REGION>.amazonaws.com/snapshots/<AWS_ACCOUNT_ID>/momentjs-lambda-layer-..."
     },
     "Version": 1,
@@ -136,10 +136,10 @@ On successful creation of lambda, you should see a response similar to the one b
     "TracingConfig": {
         "Mode": "PassThrough"
     },
-    "CodeSha256": "9Bi4aWpD8XRFI7udqYo1NTy0WlYAkUVXw6iQKK0NYBo=",
+    "CodeSha256": "aBcDEeFG1H2IjKlM3nOPQrS4Tuv5W6xYZaB+7CdEf8g=",
     "FunctionName": "currentTimeLambda",
     "CodeSize": 14236,
-    "RevisionId": "3e64f4fb-c146-47fd-bfb0-d3a14486b001",
+    "RevisionId": "a123b456-789c-0123-4def-g5hij6k789l0",
     "MemorySize": 128,
     "FunctionArn": "arn:aws:lambda:<AWS_REGION>:<AWS_ACCOUNT_ID>:function:currentTimeLambda",
     "Version": "$LATEST",
@@ -178,7 +178,7 @@ If the above command of lambda layer association was successful, you should see 
     ],
     "FunctionName": "currentTimeLambda",
     "LastModified": "2018-12-05T10:51:28.445+0000",
-    "RevisionId": "2ca09f6f-e85a-4cbd-a5ed-4f52db28bb07",
+    "RevisionId": "a123b456-789c-0123-4def-g5hij6k789l0",
     "MemorySize": 128,
     "Version": "$LATEST",
     "Role": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/AWS_ROLE_FOR_LAMBDA",
@@ -187,7 +187,7 @@ If the above command of lambda layer association was successful, you should see 
     "TracingConfig": {
         "Mode": "PassThrough"
     },
-    "CodeSha256": "9Bi4aWpD8XRFI7udqYo1NTy0WlYAkUVXw6iQKK0NYBo=",
+    "CodeSha256": "aBcDEeFG1H2IjKlM3nOPQrS4Tuv5W6xYZaB+7CdEf8g=",
     "Description": "",
     "CodeSize": 14236,
     "FunctionArn": "arn:aws:lambda:<AWS_REGION>:<AWS_ACCOUNT_ID>:function:currentTimeLambda",

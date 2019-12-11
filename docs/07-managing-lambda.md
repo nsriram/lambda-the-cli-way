@@ -19,14 +19,14 @@ Lets create an alias for `helloLambdaCLIWorld`.
   "Name": "cliLambda",
   "FunctionVersion": "1",
   "Description": "",
-  "RevisionId": "123b9999-a1bb-3456-9a3b-777r2220a222"
+  "RevisionId": "a123b456-789c-0123-4def-g5hij6k789l0"
 }
 ```
 ##### (1.2) List Aliases
 The aliases for a lambda can be listed as below.
 
 ```
-➜ aws lambda list-aliases --function-name helloLambdaCLIWorld
+➜ aws lambda list-aliases --function-name helloLambdaCLIWorld --profile "$AWS_PROFILE"
 ```  
 > output : Notice the alias has an ARN of its own.
 
@@ -54,7 +54,7 @@ The alias can be updated to a different version of the lambda.
   "Name": "cliLambda",
   "FunctionVersion": "2",
   "Description": "",
-  "RevisionId": "babcb999-a1bb-3456-9a3b-777r2220a222"
+  "RevisionId": "a123b456-789c-0123-4def-g5hij6k789l0"
 }
 ```
 

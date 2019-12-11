@@ -61,4 +61,4 @@ You will find the following tutorials covering all these.
 - [Kubeless](https://kubeless.io/)
 - [Serverless](https://serverless.com/)  
 
-**Next**: [Prerequisites and Setup](docs/01-aws-cli-installation.md)
+**Let's Begin (First Step)**: [Prerequisites and Setup](docs/01-aws-cli-installation.md)

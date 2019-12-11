@@ -50,9 +50,16 @@ need policy document. Next sections will create a policy document and an IAM rol
 ```
  
 ##### (3.2) Create IAM Role attaching the policy document
+Here, we create the `lambda-cli-role` and attach the policy document above. We also attach the `AWSLambdaFullAccess`
+permission to enable the lambda functions we will be creating in coming sections. 
+> Note: Create the IAM Role and attaching policy using your default root account. Note the `--profile default`. 
 
 ```
-➜  aws iam create-role --role-name lambda-cli-role --assume-role-policy-document file://lambdaAssumeRolePolicyDocument.json                    
+➜  aws iam create-role --role-name lambda-cli-role \
+  --assume-role-policy-document file://lambdaAssumeRolePolicyDocument.json --profile default                     
+
+➜  aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AWSLambdaFullAccess \
+  --role-name lambda-cli-role --profile default
 ```
 > output
 ```
@@ -116,19 +123,19 @@ lambda file, the role ARN for the IAM created, the `lambda-cli-user` profile
     "Timeout": 3,
     "MemorySize": 128,
     "LastModified": "2019-01-01T12:00:00.370+0000",
-    "CodeSha256": "xlQndSr77dOH7hjiuSF58mwk1YE+s7U09PH8SON1zsE=",
+    "CodeSha256": "aBcDEeFG1H2IjKlM3nOPQrS4Tuv5W6xYZaB+7CdEf8g=",
     "Version": "$LATEST",
     "TracingConfig": {
         "Mode": "PassThrough"
     },
-    "RevisionId": "a123bcde-ab12-3ef4-5678-1abc2345e9f5"
+    "RevisionId": "a123b456-789c-0123-4def-g5hij6k789l0"
 }
 ```
 
 #### (5) Invoke the lambda
 
 ```
-➜  aws lambda invoke --function-name helloLambdaCLIWorld --log-type Tail --payload '{}' outputfile.txt
+➜  aws lambda invoke --function-name helloLambdaCLIWorld --log-type Tail --payload '{}' outputfile.txt --profile "$AWS_PROFILE"
 ➜  cat outputfile.txt
 ```
 
