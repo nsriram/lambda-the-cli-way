@@ -61,7 +61,7 @@ will also be sent back to the lambda. These are ignored.
 * Create the file in `s3-event-listener-lambda` folder.
 
 > Note: The code below is escaped for `echo` command. If you are trying to copy paste, you can use the code 
-> from [s3ObjectListener.js](../samples/08/s3-event-listener-lambda/s3ObjectListener.js) folder.
+> from [s3ObjectListener.js](../samples/09/s3-event-listener-lambda/s3ObjectListener.js) folder.
 
 ```
 ➜  echo "const AWS = require('aws-sdk');
@@ -258,4 +258,4 @@ aws s3api list-objects --bucket  $BUCKET_NAME --profile $AWS_PROFILE
 
 🏁 **Congrats !** You learnt a key integration cloud service of Lambda, i.e., S3. 🏁
 
-**Next**: [Integrate with Kinesis](09-integrate-with-kinesis.md) 
+**Next**: [Integrate with Kinesis](10-integrate-with-kinesis.md) 

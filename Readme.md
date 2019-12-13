@@ -41,16 +41,17 @@ You will find the following tutorials covering all these.
 * [Prerequisites and Setup](docs/01-aws-cli-installation.md)
 * [IAM Account For Tutorial](docs/02-iam-account-setup.md)
 * [Hello World - Your First Lambda](docs/03-hello-world-your-first-lambda.md)
-* [Packaging With Dependencies](docs/04-packaging-lambda-with-dependencies.md)
-* [Lambda Layers](docs/05-lambda-layers.md)
-* [Version Lambda](docs/06-version-lambda.md)
-* [Managing Lambda](docs/07-managing-lambda.md)
-* [Integrate with S3](docs/08-integrate-with-s3.md)
-* [Integrate with Kinesis](docs/09-integrate-with-kinesis.md)
-* [Integrate with DynamoDB]
-* [Integrate with APIGateway]
-* [SAM CLI]
-* [Tear down]
+* [View Lambda Logs](docs/04-view-lambda-logs.md)
+* [Packaging With Dependencies](docs/05-packaging-lambda-with-dependencies.md)
+* [Lambda Layers](docs/06-lambda-layers.md)
+* [Version Lambda](docs/07-version-lambda.md)
+* [Managing Lambda](docs/08-managing-lambda.md)
+* [Integrate with S3](docs/09-integrate-with-s3.md)
+* [Integrate with Kinesis](docs/10-integrate-with-kinesis.md)
+* [Integrate with DynamoDB](docs/11-integrate-with-dynamodb.md)
+* [Integrate with APIGateway](docs/12-integrate-with-api-gateway.md)
+* [SAM CLI](docs/13-sam-cli.md)
+* [Tear down](docs/14-teardown.md)
 
 ## References
 - [AWS Lambda](https://aws.amazon.com/lambda/)

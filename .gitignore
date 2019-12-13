@@ -1,4 +1,4 @@
 .DS_Store
 .idea
 foo.json
-samples/08/s3-event-listener-lambda/node_modules
+samples/09/s3-event-listener-lambda/node_modules

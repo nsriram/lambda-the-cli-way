@@ -223,4 +223,4 @@ Successful invocation should list a response similar to the following.
 
 🏁 If you have seen the timestamp, **Congrats !** You got your first  lambda layer working  🏁
 
-**Next**: [Version Lambda](06-version-lambda.md)
+**Next**: [Version Lambda](07-version-lambda.md)
