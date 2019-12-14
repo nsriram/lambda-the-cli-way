@@ -1,4 +1,4 @@
-# AWS CLI Installation
+# Prerequisites and Setup
 
 ### AWS Account
 Examples used in this tutorial will be run on MacOS, using AWS CLI. You can sign-up for a new AWS account if you 
