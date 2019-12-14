@@ -14,6 +14,7 @@ A little background understanding of serverless will help.
 
 ## Tutorials
 
+* [Serverless Introduction](docs/00-serverless-introduction.md)
 * [Prerequisites and Setup](docs/01-aws-cli-installation.md)
 * [IAM Account For Tutorial](docs/02-iam-account-setup.md)
 * [Hello World - Your First Lambda](docs/03-hello-world-your-first-lambda.md)
