@@ -24,7 +24,7 @@ aws lambda publish-version \
     "Timeout": 3,
     "MemorySize": 128,
     "LastModified": "2019-11-18T16:15:54.586+0000",
-    "CodeSha256": "t0oEwo9VclTWr/gFXps0mzqaiVIh8svKURV9vpvje2s=",
+    "CodeSha256": "aBcDEeFG1H2IjKlM3nOPQrS4Tuv5W6xYZaB+7CdEf8g=",
     "Version": "1",
     "TracingConfig": {
         "Mode": "PassThrough"

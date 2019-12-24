@@ -1,26 +1,34 @@
 # Integrate with S3
+This section explains how integration can be achieved between the 2 AWS services - Lambda and S3.
 
-### Overview
+### Events and Async Systems
+Events can be produced by various AWS services (e.g., S3) for certain actions. Events allow systems to be designed 
+for asynchronous architectures. Asynchronous architectures allow systems to scale better and events are used as a
+medium of connecting various AWS Services.
+
+> Note: Certain AWS Services (ELB, API Gateway, Lex, Alexa etc.,) can also invoke AWS Lambda synchronously. 
+
+### AWS S3
 AWS S3 (Simple Storage Service) is an object storage service that is highly scalable, available. Objects of varying 
-size can be stored in buckets. AWS Lambda can be integrated with S3 to listen to events around the object lifecycle.
-The list of events supported by S3 are available here - 
-[S3 Event Types](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#supported-notification-event-types).
-
-There are many realtime use-cases where S3 object lifecycle events will need further processing, starting from 
+size can be stored in buckets. AWS Lambda can be integrated with S3, and S3 can invoke lambda with events 
+around the s3-object lifecycle. The list of S3 event types supported available here - [S3 Event Types](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#supported-notification-event-types). 
+There are many realtime use-cases where S3 object lifecycle events will need further processing, 
+starting from 
 * uploading an image to s3 should be followed by the creation of its thumbnail,    
 * uploading an document to s3 should be followed by its indexing    
 * deletion of a document should notify some related individual 
 * more examples .,
 
-This section will walk-through 'Lambda - S3' integration using a simple example of a lambda uploading a metadata *file* by 
-listening to 'object upload events from S3 bucket'.
+#### Integration Example
+The lambda function for this example will upload a metadata *file* after processing the S3 object create event. The 
+metadata file contain information about the object that was uploaded.   
 
 #### (1) Create an S3 bucket
-Following step will create a bucket. One of the constraints of S3 is, bucket names have to be universally unique. 
-Hence, giving an universally unique value is important.
+One of the constraints of S3 is, bucket names have to be universally unique. Hence, giving a universally unique name
+to the bucket is important.
 
 > Note : Earlier, when we created the IAM user, we granted the user privileges to create a bucket. 
-> Since, we are using the same profile, the bucket creation should be possible. 
+> Since, we are using the same profile and IAM role (`lambda-cli-role`), the bucket creation should be possible. 
  
 ```
 ➜  export AWS_PROFILE=lambda-cli-user
@@ -40,7 +48,7 @@ creation.
 ##### (2.1) AWS SDK Dependency
 
 The lambda has a dependency on aws-sdk. Hence, we have to bundle the dependency as we did 
-in [Packaging With Dependencies](04-packaging-lambda-with-dependencies.md).
+in [Packaging With Dependencies](05-packaging-lambda-with-dependencies.md).
 ```
 ➜ mkdir s3-event-listener-lambda
 ➜ cd s3-event-listener-lambda
@@ -255,6 +263,16 @@ aws s3api list-objects --bucket  $BUCKET_NAME --profile $AWS_PROFILE
     ]
 }
 ```
+
+#### (7) Teardown
+Lets remove the s3 objects and bucket as it will not be used further.
+
+```
+➜  aws s3api delete-object --key helloworld.txt-metadata.txt --bucket "$BUCKET_NAME" --profile "$AWS_PROFILE"
+➜  aws s3api delete-object --key helloworld.txt --bucket "$BUCKET_NAME" --profile "$AWS_PROFILE"
+➜  aws s3api delete-bucket --bucket "$BUCKET_NAME" --profile "$AWS_PROFILE"
+```
+
 
 🏁 **Congrats !** You learnt a key integration cloud service of Lambda, i.e., S3. 🏁
 

@@ -50,16 +50,13 @@ need policy document. Next sections will create a policy document and an IAM rol
 ```
  
 ##### (3.2) Create IAM Role attaching the policy document
-Here, we create the `lambda-cli-role` and attach the policy document above. We also attach the `AWSLambdaFullAccess`
-permission to enable the lambda functions we will be creating in coming sections. 
+Here, we create the `lambda-cli-role` and attach the policy document above. 
+ 
 > Note: Create the IAM Role and attaching policy using your default root account. Note the `--profile default`. 
 
 ```
 ➜  aws iam create-role --role-name lambda-cli-role \
   --assume-role-policy-document file://lambdaAssumeRolePolicyDocument.json --profile default                     
-
-➜  aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AWSLambdaFullAccess \
-  --role-name lambda-cli-role --profile default
 ```
 > output
 ```
@@ -89,6 +86,20 @@ permission to enable the lambda functions we will be creating in coming sections
 as ARN `arn:aws:iam::919191919191:role/lambda-cli-role`.
 ```
 ➜  export LAMBDA_ROLE_ARN=arn:aws:iam::919191919191:role/lambda-cli-role 
+```
+##### (3.3) Attach role policies
+We also will attach the following permissions. This is to enable the lambdas for integrating with other AWS services, 
+in coming sections.
+
+1. `AWSLambdaFullAccess`
+2. `AWSLambdaKinesisExecutionRole`
+
+```
+➜  aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AWSLambdaFullAccess \
+  --role-name lambda-cli-role --profile default
+
+➜  aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaKinesisExecutionRole \
+  --role-name lambda-cli-role --profile default
 ```
 
 #### (4) Deploy the lambda

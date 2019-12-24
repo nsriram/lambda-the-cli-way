@@ -74,29 +74,33 @@ the Access Key and Secret key returned in response.
 ```
 
 
-#### (4) Grant AWS Lambda permissions to IAM user
-We will attach the `AWSLambdaFullAccess` policy to the `lambda-cli-user` user. This policy grants 
-a lot more permissions, beyond permissions for executing basic lambda functions. 
+#### (4) Grant AWS Permissions to IAM user
+We will attach the following access policies to the `lambda-cli-user` user. 
+1. `AWSLambdaFullAccess`
+2. `AmazonKinesisFullAccess` 
+
+These policies grant more privileges (higher permissions compared to basic lambda execution permissions). 
 We will need those permissions for the upcoming integration tasks with S3, DynamoDB, Kinesis etc., 
 The document here from AWS, [Identity-based IAM Policies for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/access-control-identity-based.html) 
 outlines in detail different permission combinations associated with AWS Lambda. 
 
 ```
 ➜  aws iam attach-user-policy --user-name ${AWS_IAM_USER} --policy-arn arn:aws:iam::aws:policy/AWSLambdaFullAccess
+➜  aws iam attach-user-policy --user-name ${AWS_IAM_USER} --policy-arn arn:aws:iam::aws:policy/AmazonKinesisFullAccess
 ```
 
-This command has no output _(you can try running this with `--debug` on CLI as well, but there is no output)_. 
-To ensure the role got attached to the user, you can list the user's attached policies as below.
+This command has no output.To ensure the role got attached to the user, you can list the user's attached policies as below.
 
 ```
 ➜  aws iam list-attached-user-policies --user-name lambda-cli-user
 {
-    "AttachedPolicies": [
-        {
-            "PolicyName": "AWSLambdaFullAccess",
-            "PolicyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess"
-        }
-    ]
+  "AttachedPolicies": [{
+    "PolicyName": "AWSLambdaFullAccess",
+    "PolicyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess"
+  },{
+    "PolicyName": "AmazonKinesisFullAccess",
+    "PolicyArn": "arn:aws:iam::aws:policy/AmazonKinesisFullAccess"
+  }]
 }
 ``` 
 

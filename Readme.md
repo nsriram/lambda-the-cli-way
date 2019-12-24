@@ -30,7 +30,9 @@ A little background understanding of serverless will help.
 * [SAM CLI](docs/13-sam-cli.md)
 * [Tear down](docs/14-teardown.md)
 
-## References
+**Let's Begin**: [Serverless Introduction](docs/00-serverless-introduction.md)
+
+## References (external)
 - [AWS Lambda](https://aws.amazon.com/lambda/)
 - [Google Cloud Functions](https://cloud.google.com/functions/)
 - [Azure Functions](https://azure.microsoft.com/en-gb/services/functions/)
@@ -39,4 +41,3 @@ A little background understanding of serverless will help.
 - [Kubeless](https://kubeless.io/)
 - [Serverless](https://serverless.com/)  
 
-**Let's Begin (First Step)**: [Prerequisites and Setup](docs/01-aws-cli-installation.md)

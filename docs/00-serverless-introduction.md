@@ -20,8 +20,15 @@ there are options like KNative and Kubeless. Frameworks like serverless.com have
 simpler. They also provide monitoring options.
 
 ### AWS Lambda
-Lambda is one of the leading, matured serverless offering from AWS. 
-Lambda supports a wide range of languages and hosting configurations. 
-Lambda also has provisions for setting up triggers to listen to other aws services, handle HTTP requests, 
-consume events from a queue or run on a schedule. AWS Lambda has much more features offered and 
-You will find the following tutorials covering all these.
+Lambda is one of the leading, matured serverless offering from AWS. Lambda supports a wide range of languages and 
+hosting configurations. Lambda also has provisions for setting up triggers to listen to other aws services, handle HTTP requests, 
+consume events from a queue or run on a schedule. Lambda allows provides 'serverless' benefits like, 
+
+- No infrastructure management (using physical servers, virtual or containers)
+- Auto scaling & Highly availability
+- Pay per invocation and execution 
+- Matured Security built-in for access management and integration with other AWS services
+
+AWS Lambda has much more features offered and you will find the following tutorials covering all these.
+
+**Let's Start Coding** [Prerequisites and Setup](01-aws-cli-installation.md)
