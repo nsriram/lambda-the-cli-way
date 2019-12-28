@@ -5,12 +5,13 @@ This section will walk through integration between 2 AWS services - Kinesis and 
 Kinesis is a large scale, realtime event stream processing service from AWS. Kinesis is fully managed by AWS and 
 offers less infrastructure maintenance to users. Kinesis can handle large scale streaming data at low latency.
 Various sources can publish events to Kinesis and multiple consumers can connect and process the events.
+
+#### Integration Example
 AWS Lambda can be one of the consumers to process the Records in kinesis. AWS Lambda service can poll the kinesis 
 stream for the records and invoke a particular lambda function for processing.
 
-#### Integration Example
 The lambda function for this integration example will log the event received from kinesis. The log can be viewed using 
-AWS cloudfront. The `lambda-cli-role` we created will be used here also.
+AWS cloud watch. The `lambda-cli-role` we created will be used here also.
 
 #### (1) Setup Kinesis Stream
 In this section we will create a Kinesis Stream. This stream will be used to publish events, for lambda to consume. 
@@ -71,7 +72,7 @@ We will need the Kinesis stream ARN for associating it with Lambda. This can be 
     }
 }
 ```
-##### (1.3) set the Stream ARN, Name
+##### (1.3) Set Stream ARN, Name
 ```
 ➜ export STREAM_NAME="lambda-cli-stream"
 ➜ export STREAM_ARN="arn:aws:kinesis:us-east-1:919191919191:stream/lambda-cli-stream"
@@ -101,7 +102,7 @@ Stream records read from Kinesis, by Lambda, will have the format mentioned belo
       "awsRegion": "us-east-1",
       "eventSourceARN": "arn:aws:kinesis:us-east-1:123456789012:stream/lambda-cli-stream"
     }
-   ]
+  ]
 }
 ```
 ##### (2.2) Create the lambda
@@ -188,7 +189,7 @@ using `aws lambda list-event-source-mappings` and ensure its status is `Enabled`
 #### (4) Publish an event in Kinesis to be processed by Lambda
 
 Lets publish an event in the `lambda-cli-stream`. The event will be processed by lambda and we can check it in 
-cloud watch logs.
+CloudWatch logs.
 
 ##### (4.1) Publish event
 We will publish the event with message (data) _"Hello, Lambda CLI World"_
@@ -210,6 +211,9 @@ We will publish the event with message (data) _"Hello, Lambda CLI World"_
 
 ##### (4.2) View Lambda Log for kinesisEventLogger
 Get the log group name, log stream name for kinesisEventLogger.
+The latest `LOG_STREAM_NAME` will have the execution details.
+> Note: The LOG_STREAM_NAME has `$` symbol and needs to be escaped with backslash.
+
 
 ```
 ➜  export LOG_GROUP_NAME="/aws/lambda/kinesisEventLogger"
@@ -218,7 +222,7 @@ Get the log group name, log stream name for kinesisEventLogger.
 ➜  aws logs get-log-events --log-group-name "$LOG_GROUP_NAME" --log-stream-name "$LOG_STREAM_NAME"
 ```
 
-Above commands with proper values should display the message "Hello, Lambda CLI World" in cloud watch logs.
+Above commands with proper values should display the message "Hello, Lambda CLI World" in CloudWatch logs.
 
 ```
 {
