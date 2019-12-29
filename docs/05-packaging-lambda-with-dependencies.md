@@ -62,7 +62,7 @@ Note: Here we will use the role `lambda-cli-role` created in tutorial (3)
 aws lambda invoke --function-name formatCurrencyLambda --log-type Tail --payload '{"value": 123456789}' --profile "$AWS_PROFILE" outputfile.txt
 ```
 
-You should see the following output of executing the lambda function.
+You should see the following output after executing the lambda.
 > output
 ```
 "{"amount":"$123,456,789.00"}"

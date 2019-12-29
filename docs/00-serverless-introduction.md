@@ -22,7 +22,7 @@ simpler. They also provide monitoring options.
 ### AWS Lambda
 Lambda is one of the leading, matured serverless offering from AWS. Lambda supports a wide range of languages and 
 hosting configurations. Lambda also has provisions for setting up triggers to listen to other aws services, handle HTTP requests, 
-consume events from a queue or run on a schedule. Lambda allows provides 'serverless' benefits like, 
+consume events from a queue or run on a schedule. Lambda also provides 'serverless' benefits like, 
 
 - No infrastructure management (using physical servers, virtual or containers)
 - Auto scaling & Highly availability

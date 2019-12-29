@@ -15,7 +15,7 @@ aws-cli/1.16.236 Python/3.7.4 Darwin/18.0.0 botocore/1.12.226
 ```
 
 The examples in this tutorial are run on the versions above _(latest while writing this tutorial)_. 
-You can also verify the current (root) user your CLI is configured for using the command below.
+You can also verify the current (root) user configured for CLI, by using the command below.
 ```
 ➜  aws configure list
       Name                    Value             Type    Location

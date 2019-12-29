@@ -15,7 +15,7 @@ around the s3-object lifecycle. The list of S3 event types supported available h
 There are many realtime use-cases where S3 object lifecycle events will need further processing, 
 starting from 
 * uploading an image to s3 should be followed by the creation of its thumbnail,    
-* uploading an document to s3 should be followed by its indexing    
+* uploading a document to s3 should be followed by its indexing    
 * deletion of a document should notify some related individual 
 * more examples .,
 
@@ -69,7 +69,7 @@ will also be sent back to the lambda. These are ignored.
 * Create the file in `s3-event-listener-lambda` folder.
 
 > Note: The code below is escaped for `echo` command. If you are trying to copy paste, you can use the code 
-> from [s3ObjectListener.js](../samples/09/s3-event-listener-lambda/s3ObjectListener.js) folder.
+> from [s3ObjectListener.js](../samples/09/s3-event-listener-lambda/s3ObjectListenerLambda.js) folder.
 
 ```
 ➜  echo "const AWS = require('aws-sdk');
@@ -274,6 +274,6 @@ Lets remove the s3 objects and bucket as it will not be used further.
 ```
 
 
-🏁 **Congrats !** You learnt a key integration cloud service of Lambda, i.e., S3. 🏁
+🏁 **Congrats !** You learnt a key integration between AWS Lambda and S3. 🏁
 
 **Next**: [Integrate with Kinesis](10-integrate-with-kinesis.md) 

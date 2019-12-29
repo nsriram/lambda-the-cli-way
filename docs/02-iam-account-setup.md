@@ -87,6 +87,7 @@ outlines in detail different permission combinations associated with AWS Lambda.
 ```
 ➜  aws iam attach-user-policy --user-name ${AWS_IAM_USER} --policy-arn arn:aws:iam::aws:policy/AWSLambdaFullAccess
 ➜  aws iam attach-user-policy --user-name ${AWS_IAM_USER} --policy-arn arn:aws:iam::aws:policy/AmazonKinesisFullAccess
+➜  aws iam attach-user-policy --user-name ${AWS_IAM_USER} --policy-arn arn:aws:iam::aws:policy/AmazonAPIGatewayAdministrator
 ```
 
 This command has no output.To ensure the role got attached to the user, you can list the user's attached policies as below.
@@ -100,6 +101,9 @@ This command has no output.To ensure the role got attached to the user, you can 
   },{
     "PolicyName": "AmazonKinesisFullAccess",
     "PolicyArn": "arn:aws:iam::aws:policy/AmazonKinesisFullAccess"
+  },{
+    "PolicyName": "AmazonAPIGatewayAdministrator",
+    "PolicyArn": "arn:aws:iam::aws:policy/AmazonAPIGatewayAdministrator"
   }]
 }
 ``` 
@@ -130,7 +134,6 @@ We will set the AWS_PROFILE to `lambda-cli-user` and user `aws lambda` cli.
 ``` 
 
 You should see an output listing empty list of functions, or the ones your IAM user has access to. 
-
 
 🏁 **Congrats !** You got your AWS IAM User created and granted the user permissions to use AWS Lambda. 🏁
 

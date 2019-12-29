@@ -2,14 +2,14 @@
 This section will provide a walk through on integration between the AWS Lambda and DynamoDb
 
 ### DynamoDB
-AWS DynamoDB is a fully managed NoSQL Database that provided high performance and is scalable. Similar to other services
+AWS DynamoDB is a fully managed NoSQL Database that provides high performance and scalability. Similar to other services
 like Kinesis, S3 etc., DynamoDB also reduces the administrative overhead for teams and lets them focus on building applications.
 #### A quick overview of DynamoDB
 Similar to any database system Tables, Items, Attributes, Primary Keys and Indexes form the core concepts for DynamoDB.
 Scalar types _(number, string, binary, Boolean, and null)_ are the supported types in DynamoDB.  DynamoDB also supports 
 Lists, Maps & Sets that can be persisted in JSON format. Unlike SQL, table definitions for creating them are provided
 in the form of JSON. Data is managed (insert, update, delete) as well in the form of JSON.  
-Data is stored in DynamoDB in the form of Partitions. Partitions are create dynamically to handle scalability. 
+Data is stored in DynamoDB in the form of Partitions. Partitions are created dynamically to handle scale. 
 AWS DynamoDB has a lot more features built-in to address large scale system needs. 
 
 #### Integration Example
@@ -36,6 +36,7 @@ The table created will store Orders. We will have 2 attributes - Id and Amount.
 
 ```
 ➜ export AWS_PROFILE=lambda-cli-user
+➜ export AWS_REGION=us-east-1
 ➜ aws dynamodb create-table --table-name Orders \
   --attribute-definitions \
   AttributeName=Id,AttributeType=N \
@@ -139,7 +140,6 @@ StreamViewType, the `Records.dynamodb.Keys` will only have the `Keys`. The dynam
 
 ```
 ➜  export LAMBDA_ROLE_ARN=arn:aws:iam::919191919191:role/lambda-cli-role
-➜  export AWS_REGION=us-east-1
 ➜  zip -r /tmp/dynamoDBEventLogger.js.zip dynamoDBEventLogger.js
 ➜  aws lambda create-function \
        --region "$AWS_REGION" \
@@ -242,6 +242,6 @@ Lets remove the DynamoDB table as it will not be used further.
 ➜  aws dynamodb delete-table --table-name "Orders" --profile "$AWS_PROFILE"
 ```
 
-🏁 **Congrats !** You learnt a key integration of AWS Lambda with DynamoDB 🏁
+🏁 **Congrats !** You learnt a key integration between AWS Lambda and DynamoDB 🏁
 
 **Next**: [Integrate with APIGateway](12-integrate-with-api-gateway.md) 

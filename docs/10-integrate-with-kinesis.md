@@ -7,7 +7,7 @@ offers less infrastructure maintenance to users. Kinesis can handle large scale 
 Various sources can publish events to Kinesis and multiple consumers can connect and process the events.
 
 #### Integration Example
-AWS Lambda can be one of the consumers to process the Records in kinesis. AWS Lambda service can poll the kinesis 
+AWS Lambda can be one of the consumers to process the records in Kinesis. AWS Lambda service can poll the Kinesis 
 stream for the records and invoke a particular lambda function for processing.
 
 The lambda function for this integration example will log the event received from kinesis. The log can be viewed using 
@@ -239,6 +239,6 @@ Lets remove the Kinesis stream as it will not be used further.
 ➜  aws kinesis delete-stream --stream-name lambda-cli-stream --profile "$AWS_PROFILE"
 ```
 
-🏁 **Congrats !** You learnt a key integration of AWS Lambda with Kinesis, on event processing. 🏁
+🏁 **Congrats !** You learnt a key integration between AWS Lambda and Kinesis, for event processing. 🏁
 
 **Next**: [Integrate with DynamoDB](11-integrate-with-dynamodb.md) 

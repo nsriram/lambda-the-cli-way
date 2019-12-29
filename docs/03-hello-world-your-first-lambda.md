@@ -150,7 +150,7 @@ lambda file, the role ARN for the IAM created, the `lambda-cli-user` profile
 ➜  cat outputfile.txt
 ```
 
-You should see the following output of executing the lambda function.
+You should see the following output after executing the lambda function.
 > output
 ```
 "{\"date\":\"2019-01-01T12:00:00.000Z\",\"message\":\"Hello Lambda CLI World\"}"

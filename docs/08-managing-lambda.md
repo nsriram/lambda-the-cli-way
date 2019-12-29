@@ -81,8 +81,8 @@ Account level information like function count, code size etc., can be obtained a
 ```
 
 #### (3) Concurrent Executions
-Concurrency is the number instances in execution for a given lambda, at any given time. Concurrency 
-limits are region specific. 
+Concurrency is the number of instances in execution for a given lambda, at any given time. Concurrency 
+limits are region specific.
 
 ##### (3.1) Reserve concurrency limit for lambda
 Following command will reserve concurrency limit for a given function
