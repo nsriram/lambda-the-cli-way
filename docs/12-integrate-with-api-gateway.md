@@ -21,7 +21,7 @@ We will setup a REST API, with a GET HTTP Method returning a JSON. In the next s
 behind this gateway setup.
   
 ##### (1.1) Create REST API
-```
+```shell script
 ➜ export AWS_PROFILE=lambda-cli-user 
 ➜ export AWS_REGION=us-east-1
 ➜ aws apigateway create-rest-api \
@@ -31,7 +31,7 @@ behind this gateway setup.
   --profile "$AWS_PROFILE" 
 ```
 > Output:
-```
+```json
 {
     "id": "a1bc2de3fg",
     "name": "TimeGateway",
@@ -57,7 +57,7 @@ Lets create a resource with name 'Time', in the TimeGateway.
 Adding a GET method to the REST Api is a 2-step process. First we need the root path id and then we need to add GET. 
 Following will get the Path ID for root path (`/`).
 
-```
+```shell script
 ➜ aws apigateway get-resources \ 
   --rest-api-id $REST_API_ID \
   --profile "$AWS_PROFILE"
@@ -65,7 +65,7 @@ Following will get the Path ID for root path (`/`).
 
 > Output:
 
-```
+```json
 {"items": [{
   "id": "abcde12fg3",
   "path": "/"
@@ -75,7 +75,7 @@ Following will get the Path ID for root path (`/`).
 
 Let's add a HTTP GET method to the root path.
 
-```
+```shell script
 ➜ export RESOURCE_ID=abcde12fg3
 ➜ aws apigateway put-method \
   --rest-api-id $REST_API_ID \
@@ -86,7 +86,7 @@ Let's add a HTTP GET method to the root path.
   --profile "$AWS_PROFILE"
 ```
 > Output:
-```
+```json
 {
   "httpMethod": "GET",
   "authorizationType": "NONE",
@@ -97,7 +97,7 @@ Let's add a HTTP GET method to the root path.
 ##### (1.4) Add HTTP GET Method Response to Resource
 We will configure the response type for the GET HttpMethod we created in previous step. 
 
-```
+```shell script
 ➜ aws apigateway put-method-response \
   --rest-api-id "$REST_API_ID" \
   --resource-id "$RESOURCE_ID" \
@@ -108,7 +108,7 @@ We will configure the response type for the GET HttpMethod we created in previou
   --profile "$AWS_PROFILE"
 ```
 > Output: 
-```
+```json
 {
     "statusCode": "200",
     "responseModels": {
@@ -119,7 +119,7 @@ We will configure the response type for the GET HttpMethod we created in previou
 
 #### (2) Build and deploy the current time lambda
 We will create a simple lambda function to return current time.
-```
+```shell script
 ➜ mkdir current-time-lambda
 ➜ cd current-time-lambda
 ➜ echo "exports.handler =  async (event) => {
@@ -131,7 +131,7 @@ We will create a simple lambda function to return current time.
 ```
 Let's deploy the lambda.
 
-```
+```shell script
 ➜ export LAMBDA_ROLE_ARN=arn:aws:iam::919191919191:role/lambda-cli-role
 ➜ zip -r /tmp/currentTimeLambda.js.zip currentTimeLambda.js
 ➜ aws lambda create-function \
@@ -145,7 +145,7 @@ Let's deploy the lambda.
 ```
 > Output: 
 
-```
+```json
 {
     "FunctionName": "currentTimeLambda",
     "FunctionArn": "arn:aws:lambda:us-east-1:919191919191:function:currentTimeLambda",
@@ -175,7 +175,7 @@ We have created the REST API and the Current Time Lambda. Now, we will integrate
 
 ##### (3.1) HTTP GET Method Integration with Lambda
 We will need the Function ARN from Lambda adn REST API Id, Resource ID from Gateway to configure the put integration.
-```
+```shell script
 ➜ aws apigateway put-integration \
     --rest-api-id $REST_API_ID \
     --resource-id $RESOURCE_ID \
@@ -189,7 +189,7 @@ We will need the Function ARN from Lambda adn REST API Id, Resource ID from Gate
 > *Note*: In above command, its important to have `--integration-http-method` as POST as, API gateway communicated 
  with Lambda using POST (event if the public API is GET). This is an expected behavior for API Gateway.
 > Output: 
-```
+```json
 {
     "type": "AWS",
     "httpMethod": "GET",
@@ -204,7 +204,7 @@ We will need the Function ARN from Lambda adn REST API Id, Resource ID from Gate
 ##### (3.2) HTTP GET Method Integration Response
 The response type for the Put integration is configured next.
 
-```
+```shell script
 ➜ aws apigateway put-integration-response \
     --rest-api-id $REST_API_ID \
     --resource-id $RESOURCE_ID \
@@ -215,7 +215,7 @@ The response type for the Put integration is configured next.
     --profile "$AWS_PROFILE"
 ```
 > Output:
-```
+```json
 {
     "statusCode": "200",
     "responseTemplates": {
@@ -228,7 +228,7 @@ The response type for the Put integration is configured next.
 Permission needs to be set to invoke the Lambda from API Gateway. This is similar to the S3 invocation of lambda we did 
 earlier.
 
-```
+```shell script
 ➜ aws lambda add-permission \
     --function-name currentTimeLambda \
     --statement-id currentTimeLambda-permission \
@@ -238,7 +238,7 @@ earlier.
     --profile "$AWS_PROFILE"
 ``` 
 >Output:
-```
+```json
 {
     "Statement": "{
       \"Sid\":\"currentTimeLambda-permission\",
@@ -256,11 +256,11 @@ earlier.
 #### (6) Create a stage
 Create a stage with name 'prod' and deploy the API 
 
-```
+```shell script
 ➜ aws apigateway create-deployment --rest-api-id $REST_API_ID --stage-name prod
 ```
 > Output:
-```
+```json
 {
     "id": "a1b2cd",
     "createdDate": 1555555555
@@ -273,18 +273,18 @@ We will need the value of Deployment ID from above output.
 #### (6) Invoke GET API
 Now, lets invoke the lambda using the API gateway public URL. We should the JSON response of current time.
 
-```
+```shell script
 ➜ curl https://$REST_API_ID.execute-api.$AWS_REGION.amazonaws.com/prod
 ```
 > Output:
-```
+```json
 {"time":"2019-01-01T00:00:00.000Z"}
 ```
 
 #### (7) Teardown
 Lets remove the API gateway resources, permission provided to lambda and currentTimeLambda.
 
-```
+```shell script
 // Remove currentTimeLambda permission
 ➜ aws lambda remove-permission --function-name currentTimeLambda \
     --statement-id currentTimeLambda-permission \
@@ -330,6 +330,6 @@ Lets remove the API gateway resources, permission provided to lambda and current
     --profile "$AWS_PROFILE"
 ```
 
-🏁 **Congrats !** You learnt a key integration between AWS Lambda and Amazon API gateway 🏁
+🏁 c You learnt a key integration between AWS Lambda and Amazon API gateway 🏁
 
 **Next**: [Serverless Application Model (SAM)](13-sam-cli.md) 
