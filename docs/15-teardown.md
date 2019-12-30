@@ -1,7 +1,7 @@
 # Teardown
 
 This is the last section in the **'Lambda the CLI way'** series. As we progressed through various sections, we have
-been deleting all the resources created in them (e.g., lambdas, s3 assets, kinesis queues etc.,)
+been deleting all the resources created in them _(e.g., lambdas, s3 assets, kinesis queues etc.,)_
 
 At this point the 2 key resources that we have to remove are
 1. IAM Role `lambda-cli-role`
@@ -59,4 +59,4 @@ finally remove the IAM User `lambda-cli-user`.
       --profile default
 ```
 
-🏁 **Congrats !** This completes the Lambda, the CLI Way series 🏁 
+🏁 **Congrats !** This completes the "Lambda, the CLI Way" series 🏁 
