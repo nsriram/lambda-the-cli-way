@@ -11,12 +11,12 @@ This will enable `lambda-cli-user` to perform operations specific to AWS Lambda.
 > Note: It is assumed that you have the admin AWS user configured for performing CLI activities, related to IAM.
 
 #### (1) Create IAM  user
-```
+```shell script
 ➜  export AWS_IAM_USER=lambda-cli-user
 ➜  aws iam create-user --user-name ${AWS_IAM_USER}
 ```
 > output
-```
+```json
 {
     "User": {
         "Path": "/",
@@ -37,13 +37,13 @@ e.g., `My\$ecretpassw0rd`. You need to escape special characters on console.
 - It is not recommended to set password in plain text on console. You can use password managers or 
 source a simple shell script to set the `AWS_IAM_PASSWORD` environment variable.
 
-```
+```shell script
 ➜  export AWS_IAM_PASSWORD=My\$ecretlambdapr0file (or)
 ➜  export AWS_IAM_PASSWORD=<your_own_password>
 ➜  aws iam create-login-profile --user-name ${AWS_IAM_USER} --password ${AWS_IAM_PASSWORD} --no-password-reset-required
 ```
 > output
-```
+```json
 {
     "LoginProfile": {
         "UserName": "lambda-cli-user",
@@ -57,11 +57,11 @@ source a simple shell script to set the `AWS_IAM_PASSWORD` environment variable.
 Create active access key and secret key combination for the IAM user. It is advised to keep a note of 
 the Access Key and Secret key returned in response.
 
-```
+```shell script
 ➜  aws iam create-access-key --user-name ${AWS_IAM_USER}
 ```
 > Output
-```
+```json
 {
     "AccessKey": {
         "UserName": "lambda-cli-test-user",
@@ -78,13 +78,14 @@ the Access Key and Secret key returned in response.
 We will attach the following access policies to the `lambda-cli-user` user. 
 1. `AWSLambdaFullAccess`
 2. `AmazonKinesisFullAccess` 
+3. `AmazonAPIGatewayAdministrator`
 
 These policies grant more privileges (higher permissions compared to basic lambda execution permissions). 
-We will need those permissions for the upcoming integration tasks with S3, DynamoDB, Kinesis etc., 
+We will need those permissions for the upcoming integration tasks with S3, DynamoDB, Kinesis, API Gateway etc., 
 The document here from AWS, [Identity-based IAM Policies for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/access-control-identity-based.html) 
 outlines in detail different permission combinations associated with AWS Lambda. 
 
-```
+```shell script
 ➜  aws iam attach-user-policy --user-name ${AWS_IAM_USER} --policy-arn arn:aws:iam::aws:policy/AWSLambdaFullAccess
 ➜  aws iam attach-user-policy --user-name ${AWS_IAM_USER} --policy-arn arn:aws:iam::aws:policy/AmazonKinesisFullAccess
 ➜  aws iam attach-user-policy --user-name ${AWS_IAM_USER} --policy-arn arn:aws:iam::aws:policy/AmazonAPIGatewayAdministrator
@@ -94,6 +95,9 @@ This command has no output.To ensure the role got attached to the user, you can 
 
 ```
 ➜  aws iam list-attached-user-policies --user-name lambda-cli-user
+```
+>Output:
+```json
 {
   "AttachedPolicies": [{
     "PolicyName": "AWSLambdaFullAccess",
@@ -128,7 +132,7 @@ region = us-east-1
 At this point you should be able to use the IAM user for performing AWS Lambda related operations. 
 We will set the AWS_PROFILE to `lambda-cli-user` and user `aws lambda` cli.
 
-```
+```shell script
 ➜  export AWS_PROFILE=lambda-cli-user
 ➜  aws lambda list-functions --profile lambda-cli-user
 ``` 

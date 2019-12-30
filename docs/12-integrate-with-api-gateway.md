@@ -282,7 +282,7 @@ Now, lets invoke the lambda using the API gateway public URL. We should the JSON
 ```
 
 #### (7) Teardown
-Lets remove the API gateway resources we created and also the permission provided to lambda.
+Lets remove the API gateway resources, permission provided to lambda and currentTimeLambda.
 
 ```
 // Remove currentTimeLambda permission
@@ -322,6 +322,11 @@ Lets remove the API gateway resources we created and also the permission provide
 
 // Remove REST API
 ➜ aws apigateway delete-rest-api --rest-api-id $REST_API_ID \
+    --profile "$AWS_PROFILE"
+
+// Remove Lambda
+➜ aws lambda delete-function \
+    --function-name currentTimeLambda \
     --profile "$AWS_PROFILE"
 ```
 

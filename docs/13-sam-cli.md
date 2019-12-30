@@ -10,26 +10,27 @@ SAM enables designing of serverless applications using AWS Lambda and event sour
 [SAM Templates](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-template-anatomy.html) 
 for serverless applications can be defined in YAML. SAM simplifies the definition compared to AWS Cloud Formation. 
 
-SAM has a CLI tool that enables the development and deployment easier. Using the CLI tool,
+SAM CLI tool makes development and deployment of lambda applications simple. SAM CLI is built in Python and 
+uses Docker for local deployments. 
+
+Using the CLI tool,
 - serverless project scaffold can be created for specific runtimes and other config
 - lambda can be built, packaged and deployed locally, and migrated to AWS
 - API gateways can be run locally
 - testing and debugging can be done locally
 - integrations and event sources can be specified
 
-SAM CLI is built in Python and uses Docker for local deployments.
-
-### Hello World Using SAM
-We will build and deploy a basic serverless application on local machine using SAM.
+### Hello World Lambda on Local Machine Using SAM
+We will build and deploy a basic AWS lambda serverless application on local machine using SAM.
 
 #### (1) Install SAM
 SAM can be installed on Mac using Homebrew. You can tap into AWS repository and install aws-sam-cli.
 
+```shell script
+brew tap aws/tap
+brew install aws-sam-cli
+sam --version
 ```
-➜ brew tap aws/tap
-➜ brew install aws-sam-cli
-➜ sam --version
-```   
 > Output: The SAM CLI version while writing this section was 0.39.0.  
 ```
 SAM CLI, version 0.39.0
@@ -38,8 +39,11 @@ SAM CLI, version 0.39.0
 #### (2) Initialize a serverless project 
 Let's initialize a SAM project, for Lambda using NodeJS runtime, with npm as dependency manager. 
 
-```
-➜ sam init --name sam-app --runtime nodejs10.x --dependency-manager npm --app-template hello-world
+```shell script
+sam init --name sam-app \
+    --runtime nodejs10.x \
+    --dependency-manager npm \
+    --app-template hello-world
 ```
 
 The sam init will create a `sam-app` root folder. If you list the contents of the sam-app folder, you will
@@ -72,7 +76,7 @@ NodeJS runtime. We will see `node_modules, package.json` & SAM template file in 
 _(The scaffold creates the sample hello world with `axios` npm dependency. You will find it and it second 
 level dependencies in node_modules)_.
 
-```
+```shell script
 ➜  cd sam-app
 ➜  sam build
 ```
@@ -84,7 +88,7 @@ At any point, the clod formation templates can be validated using `sam validate`
 We will need to start Docker on local machine. If you are on Mac, you can start by `open -a Docker.app`. If you 
 don't have Docker, you need to install. Assuming Docker is running, we can start the lambda on local machine.
 
-```
+```shell script
 # From sam-app folder
 ➜ sam local start-lambda
 ```
@@ -95,18 +99,20 @@ Starting the Local Lambda Service. You can now invoke your Lambda Functions defi
 ``` 
 ##### (4.2) Test Local Instance
 The local instance of lambda can be tested using the following.
-```
+
+```shell script
 ➜ aws lambda invoke --function-name "HelloWorldFunction" \
     --endpoint-url "http://127.0.0.1:3001" \
     --no-verify-ssl out.txt
 ```
+
 > *Output*: The first invocation will fetch the `lambci/lambda:nodejs10.x` docker container image and return the following
 response.
 
 > *Logs*: On your local instance you can see the  logs detailing the docker image pull , mounting it and the 
 lambda execution. The logs will be the same as how it appears on AWS Lambda, on the cloud.
 
-```
+```shell script
 {
     "StatusCode": 200
 }
@@ -115,11 +121,13 @@ lambda execution. The logs will be the same as how it appears on AWS Lambda, on 
 #### (5) Deploy API Gateway on local machine
 A local instance of API Gateway can be started as follows. The API gateway will invoke the lambda and respond back
 with its contents.
-```
+
+```shell script
 ➜ sam local start-api
 ```
 Test the local API gateway instance using `curl` as below.
-```
+
+```shell script
 ➜ curl http://127.0.0.1:3000/hello
 ```
 > Output:
@@ -128,7 +136,7 @@ Test the local API gateway instance using `curl` as below.
 ```
 #### (6) More
 SAM templates are quite powerful and a lot of functionality can be built using it. Event processing can be configured
-via yaml and Lambda can be integrated with S3, DynamoDB and others. `sam deploy` can be used to deploy  
+via yaml and Lambda can be integrated with S3, DynamoDB and others. `sam deploy` can be used to deploy
 stacks using cloud formation templates. The packages for deployment can be generated using `sam package`. 
 
 

@@ -7,7 +7,7 @@ AWS Lambda supports other runtimes (Python, Ruby, Java, Go lang, .net) also. The
 #### (1) Create lambda function
 Following command will create a simple nodejs AWS Lambda function handler.
 
-```
+```shell script
 ➜  echo "exports.handler =  async (event) => {
   const payload = {
     date: new Date(),
@@ -34,7 +34,7 @@ For executing the lambda, it should be associated with a basic IAM Role, `AWSLam
 need policy document. Next sections will create a policy document and an IAM role.
 
 ##### (3.1) Create policy document file
-```
+```shell script
 ➜  echo '{
    "Version": "2012-10-17",
    "Statement": [
@@ -54,12 +54,12 @@ Here, we create the `lambda-cli-role` and attach the policy document above.
  
 > Note: Create the IAM Role and attaching policy using your default root account. Note the `--profile default`. 
 
-```
+```shell script
 ➜  aws iam create-role --role-name lambda-cli-role \
   --assume-role-policy-document file://lambdaAssumeRolePolicyDocument.json --profile default                     
 ```
 > output
-```
+```json
 {
     "Role": {
         "Path": "/",
@@ -84,7 +84,7 @@ Here, we create the `lambda-cli-role` and attach the policy document above.
 ```
 `Arn` key in the response is the 'Amazon Resource Name'. The role we created `lambda-cli-role` can be referred
 as ARN `arn:aws:iam::919191919191:role/lambda-cli-role`.
-```
+```shell script
 ➜  export LAMBDA_ROLE_ARN=arn:aws:iam::919191919191:role/lambda-cli-role 
 ```
 ##### (3.3) Attach role policies
@@ -94,7 +94,7 @@ in coming sections.
 1. `AWSLambdaFullAccess`
 2. `AWSLambdaKinesisExecutionRole`
 
-```
+```shell script
 ➜  aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AWSLambdaFullAccess \
   --role-name lambda-cli-role --profile default
 
@@ -107,7 +107,7 @@ The compressed lambda file is deployed using CLI to the region configured in the
 lambda file, the role ARN for the IAM created, the `lambda-cli-user` profile 
 > Note : We will directly upload the lambda function and will not use S3.
 
-```
+```shell script
 ➜  export AWS_REGION=us-east-1
 ➜  export AWS_PROFILE=lambda-cli-user
 ➜  aws lambda create-function \
@@ -122,7 +122,7 @@ lambda file, the role ARN for the IAM created, the `lambda-cli-user` profile
 
 > output
 
-```
+```json
 {
     "FunctionName": "helloLambdaCLIWorld",
     "FunctionArn": "arn:aws:lambda:us-east-1:919191919191:function:helloLambdaCLIWorld",
@@ -145,14 +145,18 @@ lambda file, the role ARN for the IAM created, the `lambda-cli-user` profile
 
 #### (5) Invoke the lambda
 
-```
-➜  aws lambda invoke --function-name helloLambdaCLIWorld --log-type Tail --payload '{}' outputfile.txt --profile "$AWS_PROFILE"
+```shell script
+➜  aws lambda invoke --function-name helloLambdaCLIWorld \
+    --log-type Tail \
+    --payload '{}' \
+    --profile "$AWS_PROFILE" outputfile.txt
+
 ➜  cat outputfile.txt
 ```
 
 You should see the following output after executing the lambda function.
 > output
-```
+```json
 "{\"date\":\"2019-01-01T12:00:00.000Z\",\"message\":\"Hello Lambda CLI World\"}"
 ```
 

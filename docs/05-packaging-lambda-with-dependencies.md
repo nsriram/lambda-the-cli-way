@@ -59,13 +59,25 @@ Note: Here we will use the role `lambda-cli-role` created in tutorial (3)
 
 #### (6) Invoke the lambda to test the dependency
 ```
-aws lambda invoke --function-name formatCurrencyLambda --log-type Tail --payload '{"value": 123456789}' --profile "$AWS_PROFILE" outputfile.txt
+➜ aws lambda invoke --function-name formatCurrencyLambda \
+    --log-type Tail \
+    --payload '{"value": 123456789}' \
+    --profile "$AWS_PROFILE" \
+    outputfile.txt
 ```
 
-You should see the following output after executing the lambda.
+You should see the following output when you view the contents of output.txt file.
 > output
 ```
-"{"amount":"$123,456,789.00"}"
+➜ cat outputfile.txt
+{"amount":"$123,456,789.00"}
+```
+
+#### (7) Teardown
+Lets remove the `formatCurrencyLambda` Lambda created above.
+
+```shell script
+➜ aws lambda delete-function --function-name formatCurrencyLambda --profile "$AWS_PROFILE"
 ```
 
 🏁 **Congrats !** You deployed your first AWS Lambda function with its dependencies and invoked it successfully. 🏁

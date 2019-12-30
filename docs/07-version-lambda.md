@@ -4,15 +4,18 @@ This section explains how to version the lambda code. We will use the `helloLamb
 
 #### (1) Publish Version for helloLambdaCLIWorld
 Lets version the `helloLambdaCLIWorld` lambda.
-
-```
-aws lambda publish-version \
-       --function-name helloLambdaCLIWorld \
-       --profile "$AWS_PROFILE"
-```  
-> output : Notice the version number "1" at the end of FunctionArn.
  
+##### (1.1) Create Lambda helloLambdaCLIWorld
+```shell script
+➜  export AWS_REGION=us-east-1
+➜  export AWS_PROFILE=lambda-cli-user
+➜  aws lambda publish-version \
+     --function-name helloLambdaCLIWorld \
+     --profile "$AWS_PROFILE"
 ```
+> Output : Notice the version number "1" at the end of FunctionArn in the output.
+ 
+```json
 {
     "FunctionName": "helloLambdaCLIWorld",
     "FunctionArn": "arn:aws:lambda:us-east-1:919191919191:function:helloLambdaCLIWorld:1",
@@ -36,7 +39,7 @@ aws lambda publish-version \
 #### Change helloLambdaCLIWorld.js
 Following command will create a nodejs AWS Lambda function responding 'Hello Lambda CLI World (v2)'.
 
-```
+```shell script
 ➜  echo "exports.handler =  async (event) => {
   const payload = {
     date: new Date(),
@@ -47,16 +50,14 @@ Following command will create a nodejs AWS Lambda function responding 'Hello Lam
 ```
 
 #### (2) Compress the lambda source file 
-```
+```shell script
 ➜  zip -r /tmp/helloLambdaCLIWorld.js.zip helloLambdaCLIWorld.js
 ```
 
 #### (3) Deploy the lambda with a new version
 We will use `update-function-code` instead of create-function to update the source code of HelloCLIWorldLambda.
 
-```
-➜  export AWS_REGION=us-east-1
-➜  export AWS_PROFILE=lambda-cli-user
+```shell script
 ➜  aws lambda update-function-code \
        --function-name helloLambdaCLIWorld \
        --zip-file 'fileb:///tmp/helloLambdaCLIWorld.js.zip' \
@@ -66,8 +67,8 @@ We will use `update-function-code` instead of create-function to update the sour
 #### (4) Version the updated Lambda
 We will update the version of the lambda to `v2`
 
-```
-aws lambda publish-version \
+```shell script
+➜  aws lambda publish-version \
        --function-name helloLambdaCLIWorld \
        --profile "$AWS_PROFILE"
 ``` 
@@ -75,33 +76,45 @@ aws lambda publish-version \
 #### (5) List all versions for the function
 We can list both versions of the helloLambdaCLIWorld as below.
 
-```
-aws lambda list-versions-by-function --function-name helloLambdaCLIWorld --profile "$AWS_PROFILE"
+```shell script
+➜ aws lambda list-versions-by-function \
+    --function-name helloLambdaCLIWorld \
+    --profile "$AWS_PROFILE"
 ```
 
 #### (6) Invoke specific versions
 
 We can invoke both version 1 and version 2 as below.
 
-```
+```shell script
 # Invoke version 1
-➜  aws lambda invoke --function-name helloLambdaCLIWorld --profile "$AWS_PROFILE" --qualifier 1 --log-type Tail --payload '{}' outputfile.txt
+➜  aws lambda invoke \
+     --function-name helloLambdaCLIWorld \
+     --profile "$AWS_PROFILE" \
+     --qualifier 1 \
+     --log-type Tail \
+     --payload '{}' outputfile.txt
 
 # Invoke version 2
-➜  aws lambda invoke --function-name helloLambdaCLIWorld --profile "$AWS_PROFILE" --qualifier 2 --log-type Tail --payload '{}' outputfile.txt
-
+➜  aws lambda invoke \
+     --function-name helloLambdaCLIWorld \
+     --profile "$AWS_PROFILE" \
+     --qualifier 2 \
+     --log-type Tail \
+     --payload '{}' outputfile.txt
 ```
 
 The output will be as below, accordingly (`cat output.txt`).
 
-```
-//v1
+> (v1) Output:
+```json
 "{\"date\":\"2019-11-18T16:35:58.554Z\",\"message\":\"Hello Lambda CLI World\"}"%
+```
 
-//v2
+> (v2) Output:
+```json
 "{\"date\":\"2019-11-18T16:36:11.588Z\",\"message\":\"Hello Lambda CLI World (v2)\"}"%
-
-``` 
+```
 
 🏁 **Congrats !** You versioned your Lambda functions, listed them and invoked specific versions successfully. 🏁
 

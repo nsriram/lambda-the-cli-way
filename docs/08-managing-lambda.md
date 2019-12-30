@@ -6,14 +6,14 @@ Lambdas can have aliases. The precondition is to have a lambda with valid versio
 ##### (1.1) Create Alias 
 Lets create an alias for `helloLambdaCLIWorld`.
 
-```
+```shell script
 ➜ aws lambda create-alias --function-name helloLambdaCLIWorld \
-    --profile "$AWS_PROFILE" \ 
+    --profile "$AWS_PROFILE" \
     --function-version "1" \
     --name "cliLambda"
 ```
 > output : Notice the alias has an ARN of its own.
-```
+```json
 {
   "AliasArn": "arn:aws:lambda:us-east-1:919191919191:function:helloLambdaCLIWorld:cliLambda",
   "Name": "cliLambda",
@@ -25,12 +25,12 @@ Lets create an alias for `helloLambdaCLIWorld`.
 ##### (1.2) List Aliases
 The aliases for a lambda can be listed as below.
 
-```
+```shell script
 ➜ aws lambda list-aliases --function-name helloLambdaCLIWorld --profile "$AWS_PROFILE"
 ```  
 > output : Notice the alias has an ARN of its own.
 
-```
+```json
 {"Aliases": [{ 
   "AliasArn": "arn:aws:lambda:us-east-1:919191919191:function:helloLambdaCLIWorld:cliLambda",
   "Name": "cliLambda",
@@ -41,14 +41,14 @@ The aliases for a lambda can be listed as below.
 ```
 ##### (1.3) Update Alias
 The alias can be updated to a different version of the lambda.
-```
+```shell script
 ➜ aws lambda update-alias --name cliLambda \
     --function-name helloLambdaCLIWorld \
     --profile "$AWS_PROFILE" \
     --function-version 2
 ```
 > output : Notice the alias has an ARN of its own.
-```
+```json
 {
   "AliasArn": "arn:aws:lambda:us-east-1:919191919191:function:helloLambdaCLIWorld:cliLambda",
   "Name": "cliLambda",
@@ -57,14 +57,19 @@ The alias can be updated to a different version of the lambda.
   "RevisionId": "a123b456-789c-0123-4def-g5hij6k789l0"
 }
 ```
+##### (1.4) Delete Alias
+Following will delete the aliases that we created in last few steps.
+```
+➜ aws lambda delete-alias --function-name  helloLambdaCLIWorld --name cliLambda
+```
 
 #### (2) Lambda Account level information
 Account level information like function count, code size etc., can be obtained as below.
-```
+```shell script
 ➜ aws lambda get-account-settings --profile "$AWS_PROFILE"
 ```
 > output : Notice the ConcurrentExecutions and UnreservedConcurrentExecutions. This is our next topic.
-```
+```json
 {
     "AccountLimit": {
         "TotalCodeSize": 60556036800,
@@ -123,9 +128,9 @@ This will bring the UnreservedConcurrentExecutions back to 1000.
 Lambda can be deleted as below. We will delete the formatCurrencyLambda created in (4).
 
 ```
-➜  aws lambda delete-function --function-name formatCurrencyLambda --profile "$AWS_PROFILE"
+➜  aws lambda delete-function --function-name helloLambdaCLIWorld --profile "$AWS_PROFILE"
 ``` 
 
-🏁 **Congrats !** You learnt a lot of basic functions to manage your Lambda. 🏁
+🏁 **Congrats !** You learnt the basic functions for managing AWS Lambda. 🏁
 
 **Next**: [Integrate with S3](09-integrate-with-s3.md)

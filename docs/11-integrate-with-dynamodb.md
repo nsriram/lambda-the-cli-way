@@ -34,7 +34,7 @@ The table created will store Orders. We will have 2 attributes - Id and Amount.
 - We will keep the provisioned throughput to a low value of 1, for both READ and WRITE
 - The streaming of events will be enabled while creating the table. The events will only send the KEYS.
 
-```
+```shell script
 ➜ export AWS_PROFILE=lambda-cli-user
 ➜ export AWS_REGION=us-east-1
 ➜ aws dynamodb create-table --table-name Orders \
@@ -48,7 +48,7 @@ The table created will store Orders. We will have 2 attributes - Id and Amount.
 ```
 > Output : 
 
-```
+```json
 {
     "TableDescription": {
         "AttributeDefinitions": [
@@ -85,7 +85,7 @@ The table created will store Orders. We will have 2 attributes - Id and Amount.
 The value of `LatestStreamArn` from the table creation response will be used for event source mapping later. 
 Let's export it.
 
-```
+```shell script
 ➜ export DYNAMODB_STREAM_ARN="arn:aws:dynamodb:us-east-1:919191919191:table/Orders/stream/2019-01-01T00:00:00.000"
 ```
 
@@ -96,7 +96,7 @@ We will build a simple lambda that will process DynamoDB stream events and log t
 DynamoDB Stream records read by Lambda, have the format mentioned below. Since we enabled only `KEYS_ONLY` as 
 StreamViewType, the `Records.dynamodb.Keys` will only have the `Keys`. The dynamoDBEventLogger will log these keys.
 
-```
+```json
 {
   "Records": [
     {
@@ -128,7 +128,7 @@ StreamViewType, the `Records.dynamodb.Keys` will only have the `Keys`. The dynam
 *Note:*
 > The lambda will look for the data in key `record.dynamodb.Keys`. 
 
-```
+```shell script
 ➜ mkdir dynamodb-event-logger-lambda
 ➜ cd dynamodb-event-logger-lambda
 ➜ echo "exports.handler =  async (event, context, callback) => {
@@ -138,7 +138,7 @@ StreamViewType, the `Records.dynamodb.Keys` will only have the `Keys`. The dynam
 
 ##### (2.3) Bundle & Deploy the lambda
 
-```
+```shell script
 ➜  export LAMBDA_ROLE_ARN=arn:aws:iam::919191919191:role/lambda-cli-role
 ➜  zip -r /tmp/dynamoDBEventLogger.js.zip dynamoDBEventLogger.js
 ➜  aws lambda create-function \
@@ -152,7 +152,7 @@ StreamViewType, the `Records.dynamodb.Keys` will only have the `Keys`. The dynam
 ``` 
 > Output: 
 
-```
+```json
 {
     "FunctionName": "dynamoDBEventLogger",
     "FunctionArn": "arn:aws:lambda:us-east-1:919191919191:function:dynamoDBEventLogger",
@@ -175,7 +175,7 @@ StreamViewType, the `Records.dynamodb.Keys` will only have the `Keys`. The dynam
 
 #### (3) Map DynamoDB to Lambda using event-source-mapping
 We will create an event source mapping between `dynamoDBEventLogger` lambda and the DynamoDB Streams for `Orders` table.
-```
+```shell script
 ➜  aws lambda create-event-source-mapping \
   --function-name dynamoDBEventLogger \
   --batch-size 1 \
@@ -184,7 +184,7 @@ We will create an event source mapping between `dynamoDBEventLogger` lambda and 
   --profile "$AWS_PROFILE"
 ```
 > Output: 
-```
+```json
 {
     "UUID": "abcde123-f78g-90h1-2i34-j5kl56789012",
     "BatchSize": 1,
@@ -203,7 +203,7 @@ We will trigger the lambda by putting an item in the Order table. This will fire
 the dynamodb stream and the event source mapping done.
  
 ##### (4.1) Put Item
-```
+```shell script
 ➜  echo '{
      "Id": {"N": "1.0"},
      "Amount": {"N": "1000.0"}
@@ -218,7 +218,7 @@ Get the log group name, log stream name for dynamoDBEventLogger.
 The latest `LOG_STREAM_NAME` will have the execution details.
 > Note: The LOG_STREAM_NAME has `$` symbol and needs to be escaped with backslash.
 
-```
+```shell script
 ➜  export LOG_GROUP_NAME="/aws/lambda/dynamoDBEventLogger"
 ➜  aws logs describe-log-streams --log-group-name "$LOG_GROUP_NAME" --profile "$AWS_PROFILE"
 ➜  export LOG_STREAM_NAME="2019/12/13/[\$LATEST]aBcDEeFG1H2IjKlM3nOPQrS4Tuv5W6xYZaB"
@@ -227,7 +227,7 @@ The latest `LOG_STREAM_NAME` will have the execution details.
 
 Above commands with proper values should display the message "Hello, Lambda CLI World" in CloudWatch logs.
 
-```
+```json
 {
     "timestamp": 1234567890123,
     "message": "2019-12-13T00:00:00.000Z\11111111-aaaa-bbbb-cccc-1234567890\tINFO\tHello, Lambda CLI World\n",
@@ -238,8 +238,14 @@ Above commands with proper values should display the message "Hello, Lambda CLI 
 #### (5) Teardown
 Lets remove the DynamoDB table as it will not be used further.
 
-```
-➜  aws dynamodb delete-table --table-name "Orders" --profile "$AWS_PROFILE"
+```shell script
+➜ aws dynamodb delete-table \
+    --table-name "Orders" \
+    --profile "$AWS_PROFILE"
+
+➜  aws lambda delete-function \
+    --function-name dynamoDBEventLogger \
+    --profile "$AWS_PROFILE"
 ```
 
 🏁 **Congrats !** You learnt a key integration between AWS Lambda and DynamoDB 🏁

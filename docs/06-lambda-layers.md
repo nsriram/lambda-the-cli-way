@@ -13,7 +13,7 @@ With layers, you can use libraries in your function without needing to include t
 
 ### (1) Publish the layer
 #### (1.1) Create an empty nodejs project and add momentjs dependency.
-```
+```shell script
 > mkdir momentjs-lambda-layer
 > cd momentjs-lambda-layer
 > npm init -y
@@ -30,7 +30,7 @@ momentjs-lambda-layer.zip
 └ nodejs/node_modules/moment
 ```
 
-```
+```shell script
 > mkdir -p dist/nodejs
 > cp package.json dist/nodejs
 > cd dist/nodejs
@@ -49,7 +49,7 @@ We will publish the lambda layer under MIT license. We are not using S3, but dir
 **_Note_** :
 - You can publish as many times a layer and they will be automatically published as next version.
 
-```
+```shell script
 > aws lambda publish-layer-version --layer-name "momentjs-lambda-layer" \
   --description "NodeJS module of Moment JS library" \
   --license-info "MIT" \
@@ -57,9 +57,9 @@ We will publish the lambda layer under MIT license. We are not using S3, but dir
   --zip-file "fileb:////tmp/momentjs-lambda-layer.zip" \
   --profile "$AWS_PROFILE"
 ```
-> output
+> Output:
 
-```
+```json
 {
     "LayerVersionArn": "arn:aws:lambda:<AWS_REGION>:<AWS_ACCOUNT_ID>:layer:momentjs-lambda-layer:1",
     "Description": "NodeJS module of Moment JS library",
@@ -87,7 +87,7 @@ We will publish the lambda layer under MIT license. We are not using S3, but dir
 - This example intentionally avoids ES6 `import`.
 - Move to the same level as the folder `momentjs-lambda-layer` and create `current-time-lambda`.   
 
-```
+```shell script
 > mkdir current-time-lambda
 > cd current-time-lambda
 > npm init -y
@@ -95,7 +95,7 @@ We will publish the lambda layer under MIT license. We are not using S3, but dir
 
 Create the lambda file with `momentjs` dependency.
 
-```
+```shell script
 > echo "const moment = require('moment');
 
 exports.handler = (event, context, callback) => {
@@ -112,13 +112,13 @@ exports.handler = (event, context, callback) => {
 Here, we only need the single js file containing the lambda function. 
 The essential purpose of lambda layers - _simplify the bundling of lambda and separate the node_modules (dependencies) concern._
 
-```
+```shell script
 > zip -r /tmp/currentTimeLambda.js.zip currentTimeLambda.js
 ```
 
 #### (2.3) Deploy the lambda
 
-```
+```shell script
 aws lambda create-function \
     --region "$AWS_REGION" \
     --function-name currentTimeLambda \
@@ -131,7 +131,7 @@ aws lambda create-function \
 
 On successful creation of lambda, you should see a response similar to the one below.
 
-```
+```json
 {
     "TracingConfig": {
         "Mode": "PassThrough"
@@ -160,7 +160,7 @@ _Note_ : If you try executing the lambda function, it will throw error mentionin
 * For this we need the `LayerVersionArn` that was returned by AWS when the lambda layer was created. Refer to step 1.4 above.
 * Layers and lambda runtimes compatibility should be checked when this association is done.
 
-```
+```shell script
 > aws lambda update-function-configuration \
   --function-name currentTimeLambda \
   --layers arn:aws:lambda:<AWS_REGION>:<AWS_ACCOUNT_ID>:layer:momentjs-lambda-layer:1 --profile "$AWS_PROFILE"
@@ -168,7 +168,7 @@ _Note_ : If you try executing the lambda function, it will throw error mentionin
 
 If the above command of lambda layer association was successful, you should see the layer listed in the lambda details as below.
 
-```
+```json
 {
     "Layers": [
         {
@@ -200,17 +200,21 @@ If the above command of lambda layer association was successful, you should see 
 ### (4.1) Invoke the lambda
 * Now, we will invoke the lambda to verify that it uses lambda layer for momentjs dependency.
 
-```
->  aws lambda invoke --function-name currentTimeLambda --profile "$AWS_PROFILE" --log-type Tail --payload '{}' outputfile.txt
+```shell script
+> aws lambda invoke 
+    --function-name currentTimeLambda \
+    --profile "$AWS_PROFILE" \
+    --log-type Tail \
+    --payload '{}' outputfile.txt
 ```
 
 Successful invocation should list a response similar to the following.
 
-```
+```json
 {
-    "LogResult": "U1RBUlQgUmVxdWVzdElkOiA2OWZmMzMwMS0yY2IxLTQ5Y2ItOGJlMS0yMWQwNGZ...TYyLjk2IG1zCQo=",
-    "ExecutedVersion": "$LATEST",
-    "StatusCode": 200
+  "LogResult": "A1BCDefghiJKLmnOPQRSt2OWZmMzMwMS0yY2IxLTQ5Y2ItOGJlMS0yMWQwNGZ...TYyLjk2IG1zCQo=",
+  "ExecutedVersion": "$LATEST",
+  "StatusCode": 200
 }
 ```
 ### (4.2) View the output
@@ -219,6 +223,14 @@ Successful invocation should list a response similar to the following.
 ```
 > cat outputfile.txt
 {"time":"November 18th 2019, 3:44:31 pm"}%
+```
+
+#### (5) Teardown
+Lets remove the lambda layer `momentjs-lambda-layer` & the Lambda `currentTimeLambda` we created above.
+
+```shell script
+➜ aws lambda delete-layer-version --layer-name "momentjs-lambda-layer" --version-number 1
+➜ aws lambda delete-function --function-name currentTimeLambda --profile "$AWS_PROFILE"
 ```
 
 🏁 If you have seen the timestamp, **Congrats !** You got your first  lambda layer working  🏁

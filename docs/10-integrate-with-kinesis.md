@@ -21,7 +21,7 @@ The kinesis stream will be created with single shard. A shard is a uniquely iden
 data records in a stream. For our tutorial purpose, one shard is adequate. More concepts on Kinesis can be learnt from
 [Kinesis Data Streams Terminology and Concepts](https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html)
 
-```
+```shell script
 ➜ export AWS_PROFILE=lambda-cli-user
 ➜ aws kinesis create-stream --stream-name lambda-cli-stream --shard-count 1 --profile "$AWS_PROFILE"
 ```
@@ -30,19 +30,19 @@ Verify the creation of kinesis stream, by listing all the streams.
 ➜ aws kinesis list-streams --profile "$AWS_PROFILE"  
 ```
 > Output:
-```
+```json
 { "StreamNames": [ "lambda-cli-stream" ] }
 ```
 
 ##### (1.2) Kinesis Stream ARN
 We will need the Kinesis stream ARN for associating it with Lambda. This can be obtained by describing `lambda-cli-stream`.
 
-```
+```shell script
 ➜ export STREAM_NAME="lambda-cli-stream"
 ➜ aws kinesis describe-stream --stream-name "$STREAM_NAME" --profile "$AWS_PROFILE"
 ```
 > Output:
-```
+```json
 {
     "StreamDescription": {
         "Shards": [
@@ -83,7 +83,7 @@ We will build a simple lambda that will process kinesis events and log them.
 
 ##### (2.1) Sample Kinesis Record Event
 Stream records read from Kinesis, by Lambda, will have the format mentioned below.
-```
+```json
 {
   "Records": [
     {
@@ -119,7 +119,7 @@ Stream records read from Kinesis, by Lambda, will have the format mentioned belo
 ```
 ##### (2.3) Bundle & Deploy the lambda
 
-```
+```shell script
 ➜  export LAMBDA_ROLE_ARN=arn:aws:iam::919191919191:role/lambda-cli-role
 ➜  export AWS_REGION=us-east-1
 ➜  zip -r /tmp/kinesisEventLogger.js.zip kinesisEventLogger.js
@@ -133,7 +133,7 @@ Stream records read from Kinesis, by Lambda, will have the format mentioned belo
        --profile "$AWS_PROFILE"
 ``` 
 > output
-```
+```json
 {
     "FunctionName": "kinesisEventLogger",
     "FunctionArn": "arn:aws:lambda:us-east-1:919191919191:function:kinesisEventLogger",
@@ -160,7 +160,7 @@ Lambda can be mapped to the Kinesis stream in batches of events. We will map it 
 for every event published in the Kinesis stream `lambda-cli-stream`, the `kinesisEventLogger` lambda will be
 executed.
 
-```
+```shell script
 ➜  aws lambda create-event-source-mapping \
     --function-name kinesisEventLogger \
     --event-source "$STREAM_ARN" \
@@ -170,7 +170,7 @@ executed.
 ```
 > Output :
 
-```
+```json
 {
     "UUID": "12345678-a1b2-3cde-4567-89fg012hi34j",
     "BatchSize": 1,
@@ -194,7 +194,7 @@ CloudWatch logs.
 ##### (4.1) Publish event
 We will publish the event with message (data) _"Hello, Lambda CLI World"_
 
-```
+```shell script
 ➜  aws kinesis put-record --stream-name "$STREAM_NAME" \
     --partition-key 1 \
     --data "Hello, Lambda CLI World" \
@@ -202,7 +202,7 @@ We will publish the event with message (data) _"Hello, Lambda CLI World"_
 ```
 
 > Output:
-```
+```json
 {
     "ShardId": "shardId-000000000000",
     "SequenceNumber": "12345678901234567890123456789012345678901234567890123456"
@@ -215,7 +215,7 @@ The latest `LOG_STREAM_NAME` will have the execution details.
 > Note: The LOG_STREAM_NAME has `$` symbol and needs to be escaped with backslash.
 
 
-```
+```shell script
 ➜  export LOG_GROUP_NAME="/aws/lambda/kinesisEventLogger"
 ➜  aws logs describe-log-streams --log-group-name "$LOG_GROUP_NAME" --profile "$AWS_PROFILE"
 ➜  export LOG_STREAM_NAME="2019/12/13/[\$LATEST]aBcDEeFG1H2IjKlM3nOPQrS4Tuv5W6xYZaB"
@@ -224,7 +224,7 @@ The latest `LOG_STREAM_NAME` will have the execution details.
 
 Above commands with proper values should display the message "Hello, Lambda CLI World" in CloudWatch logs.
 
-```
+```json
 {
     "timestamp": 1234567890123,
     "message": "2019-12-13T00:00:00.000Z\11111111-aaaa-bbbb-cccc-1234567890\tINFO\tHello, Lambda CLI World\n",
@@ -233,10 +233,16 @@ Above commands with proper values should display the message "Hello, Lambda CLI 
 ```
 
 #### (5) Teardown
-Lets remove the Kinesis stream as it will not be used further.
+Lets remove the Kinesis stream and Lambda `kinesisEventLogger`.
 
-```
-➜  aws kinesis delete-stream --stream-name lambda-cli-stream --profile "$AWS_PROFILE"
+```shell script
+➜ aws kinesis delete-stream \
+    --stream-name lambda-cli-stream \
+    --profile "$AWS_PROFILE"
+
+➜ aws lambda delete-function \
+    --function-name kinesisEventLogger \
+    --profile "$AWS_PROFILE"
 ```
 
 🏁 **Congrats !** You learnt a key integration between AWS Lambda and Kinesis, for event processing. 🏁

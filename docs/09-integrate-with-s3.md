@@ -49,7 +49,7 @@ creation.
 
 The lambda has a dependency on aws-sdk. Hence, we have to bundle the dependency as we did 
 in [Packaging With Dependencies](05-packaging-lambda-with-dependencies.md).
-```
+```shell script
 ➜ mkdir s3-event-listener-lambda
 ➜ cd s3-event-listener-lambda
 ➜ npm init -y
@@ -71,7 +71,7 @@ will also be sent back to the lambda. These are ignored.
 > Note: The code below is escaped for `echo` command. If you are trying to copy paste, you can use the code 
 > from [s3ObjectListener.js](../samples/09/s3-event-listener-lambda/s3ObjectListenerLambda.js) folder.
 
-```
+```shell script
 ➜  echo "const AWS = require('aws-sdk');
          const s3 = new AWS.S3();
          
@@ -117,7 +117,7 @@ Bundle the `s3ObjectListenerLambda.js` with the `node_modules`. The `lambda-cli-
 > Note : This bundle `s3ObjectListenerLambda.js.zip` could be approximately 6-7MB in size. 
 > This is larger in size, compared to accounting.js example we saw earlier.  
 
-```
+```shell script
 ➜  zip -r /tmp/s3ObjectListenerLambda.js.zip node_modules s3ObjectListenerLambda.js
 ➜  export LAMBDA_ROLE_ARN=arn:aws:iam::919191919191:role/lambda-cli-role
 ➜  export AWS_REGION=us-east-1
@@ -131,8 +131,8 @@ Bundle the `s3ObjectListenerLambda.js` with the `node_modules`. The `lambda-cli-
      --zip-file 'fileb:///tmp/s3ObjectListenerLambda.js.zip' \
      --profile "$AWS_PROFILE"
 ```
-> output : Successful creation of Lambda should receive a response similar to the one below.  
-```
+> Output : Successful creation of Lambda should receive a response similar to the one below.  
+```json
 {
     "FunctionName": "s3ObjectListenerLambda",
     "FunctionArn": "arn:aws:lambda:us-east-1:919191919191:function:s3ObjectListenerLambda",
@@ -156,7 +156,7 @@ Bundle the `s3ObjectListenerLambda.js` with the `node_modules`. The `lambda-cli-
 
 ##### (4.1) Define S3 Put Object Notification config file
 Add Lambda invocation permission to S3 bucket, to invoke the lambda when objects are uploaded. 
-```
+```shell script
 ➜ aws lambda add-permission \
   --function-name s3ObjectListenerLambda \
   --statement-id lambda-cli-way-bucket-invoke \
@@ -167,7 +167,7 @@ Add Lambda invocation permission to S3 bucket, to invoke the lambda when objects
 ```
 > output : 
 
-```
+```json
 {
   "Statement": "{
     \"Sid\":\"lambda-cli-way-bucket-invoke\",
@@ -186,7 +186,7 @@ Add Lambda invocation permission to S3 bucket, to invoke the lambda when objects
 Next step is to enable the S3 bucket to publish events, when objects are uploaded to it. We will create a notification 
 json file to upload.
 
-```
+```shell script
 ➜ echo '{
   "LambdaFunctionConfigurations": [{
      "Id": "lambda-cli-s3-notification-id",
@@ -200,7 +200,7 @@ json file to upload.
 Here we will use the 
 `aws s3api` command of AWS CLI and create a `put-bucket-notification-configuration`.
 
-```
+```shell script
 ➜  aws s3api put-bucket-notification-configuration \
   --bucket $BUCKET_NAME \
   --notification-configuration file://lambda-cli-s3-notification.json \
@@ -216,13 +216,13 @@ A quick recap of the steps, completed so far.
 #### (5) Upload object to S3
 We will create an object in S3 and see if the Lambda executes and creates a metadata file.
 
-```
+```shell script
 ➜  echo "hello Lambda CLI world" > helloworld.txt
 ➜  aws s3api put-object --bucket $BUCKET_NAME --key helloworld.txt --body helloworld.txt --profile "$AWS_PROFILE"
 ```
 > output: Will be an etag of the uploaded object
 
-```
+```json
 {
     "ETag": "\"a12b3cd45e67f890g1234567hij8901k\""
 }
@@ -230,12 +230,12 @@ We will create an object in S3 and see if the Lambda executes and creates a meta
 #### (6) Check for metadata file
 Listing the object in the bucket will display the `helloworld.txt` file and also `helloworld.txt-metadata.txt` file.
 
-```
+```shell script
 aws s3api list-objects --bucket  $BUCKET_NAME --profile $AWS_PROFILE
 ```
 > output: Will list helloworld.txt and helloworld.txt-metadata.txt file
 
-```
+```json
 {
     "Contents": [
         {
@@ -265,12 +265,13 @@ aws s3api list-objects --bucket  $BUCKET_NAME --profile $AWS_PROFILE
 ```
 
 #### (7) Teardown
-Lets remove the s3 objects and bucket as it will not be used further.
+Lets remove the s3 objects, s3 bucket and AWS Lambda `s3ObjectListenerLambda`.
 
-```
-➜  aws s3api delete-object --key helloworld.txt-metadata.txt --bucket "$BUCKET_NAME" --profile "$AWS_PROFILE"
-➜  aws s3api delete-object --key helloworld.txt --bucket "$BUCKET_NAME" --profile "$AWS_PROFILE"
-➜  aws s3api delete-bucket --bucket "$BUCKET_NAME" --profile "$AWS_PROFILE"
+```shell script
+➜ aws s3api delete-object --key helloworld.txt-metadata.txt --bucket "$BUCKET_NAME" --profile "$AWS_PROFILE"
+➜ aws s3api delete-object --key helloworld.txt --bucket "$BUCKET_NAME" --profile "$AWS_PROFILE"
+➜ aws s3api delete-bucket --bucket "$BUCKET_NAME" --profile "$AWS_PROFILE"
+➜ aws lambda delete-function --function-name s3ObjectListenerLambda --profile "$AWS_PROFILE"
 ```
 
 
