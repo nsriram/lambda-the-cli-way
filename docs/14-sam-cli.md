@@ -142,5 +142,5 @@ stacks using cloud formation templates. The packages for deployment can be gener
 
 🏁 **Congrats !** You learnt the basics of SAM and local deployment of Lambda 🏁
 
-**Next**: [Teardown](14-teardown.md) 
+**Next**: [Teardown](15-teardown.md) 
 

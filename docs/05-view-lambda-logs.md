@@ -145,5 +145,5 @@ Lets remove the `helloWorldWithLog` Lambda created above.
 
 🏁 **Congrats !** You observed the logs of a lambda after deploying it successfully. 🏁
 
-**Next**: [Packaging With Dependencies](05-packaging-lambda-with-dependencies.md)
+**Next**: [Packaging With Dependencies](06-packaging-lambda-with-dependencies.md)
  

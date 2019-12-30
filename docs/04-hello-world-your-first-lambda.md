@@ -162,4 +162,4 @@ You should see the following output after executing the lambda function.
 
 🏁 **Congrats !** You deployed your first AWS Lambda function and invoked it successfully. 🏁
 
-**Next**: [View Lambda Logs](04-view-lambda-logs.md)
+**Next**: [View Lambda Logs](05-view-lambda-logs.md)

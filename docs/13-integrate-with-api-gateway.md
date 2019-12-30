@@ -332,4 +332,4 @@ Lets remove the API gateway resources, permission provided to lambda and current
 
 🏁 c You learnt a key integration between AWS Lambda and Amazon API gateway 🏁
 
-**Next**: [Serverless Application Model (SAM)](13-sam-cli.md) 
+**Next**: [Serverless Application Model (SAM)](14-sam-cli.md) 

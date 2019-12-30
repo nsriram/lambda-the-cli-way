@@ -133,4 +133,4 @@ Lambda can be deleted as below. We will delete the formatCurrencyLambda created 
 
 🏁 **Congrats !** You learnt the basic functions for managing AWS Lambda. 🏁
 
-**Next**: [Integrate with S3](09-integrate-with-s3.md)
+**Next**: [Integrate with S3](10-integrate-with-s3.md)

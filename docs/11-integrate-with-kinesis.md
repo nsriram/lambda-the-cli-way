@@ -247,4 +247,4 @@ Lets remove the Kinesis stream and Lambda `kinesisEventLogger`.
 
 🏁 **Congrats !** You learnt a key integration between AWS Lambda and Kinesis, for event processing. 🏁
 
-**Next**: [Integrate with DynamoDB](11-integrate-with-dynamodb.md) 
+**Next**: [Integrate with DynamoDB](12-integrate-with-dynamodb.md) 

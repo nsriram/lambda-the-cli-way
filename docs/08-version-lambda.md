@@ -118,4 +118,4 @@ The output will be as below, accordingly (`cat output.txt`).
 
 🏁 **Congrats !** You versioned your Lambda functions, listed them and invoked specific versions successfully. 🏁
 
-**Next**: [Managing Your Lambda](08-managing-lambda.md)
+**Next**: [Managing Your Lambda](09-managing-lambda.md)

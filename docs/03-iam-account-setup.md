@@ -141,4 +141,4 @@ You should see an output listing empty list of functions, or the ones your IAM u
 
 🏁 **Congrats !** You got your AWS IAM User created and granted the user permissions to use AWS Lambda. 🏁
 
-**Next**: [Hello World - Your First Lambda](03-hello-world-your-first-lambda.md)
+**Next**: [Hello World - Your First Lambda](04-hello-world-your-first-lambda.md)

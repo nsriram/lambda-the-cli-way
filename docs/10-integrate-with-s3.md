@@ -48,7 +48,7 @@ creation.
 ##### (2.1) AWS SDK Dependency
 
 The lambda has a dependency on aws-sdk. Hence, we have to bundle the dependency as we did 
-in [Packaging With Dependencies](05-packaging-lambda-with-dependencies.md).
+in [Packaging With Dependencies](06-packaging-lambda-with-dependencies.md).
 ```shell script
 ➜ mkdir s3-event-listener-lambda
 ➜ cd s3-event-listener-lambda
@@ -112,7 +112,7 @@ will also be sent back to the lambda. These are ignored.
 #### (3) Bundle & Deploy the lambda
 
 Bundle the `s3ObjectListenerLambda.js` with the `node_modules`. The `lambda-cli-role` IAM Role we created in  
-[Hello World - Your First Lambda](03-hello-world-your-first-lambda.md) will be used here for S3 Access from Lambda.
+[Hello World - Your First Lambda](04-hello-world-your-first-lambda.md) will be used here for S3 Access from Lambda.
  
 > Note : This bundle `s3ObjectListenerLambda.js.zip` could be approximately 6-7MB in size. 
 > This is larger in size, compared to accounting.js example we saw earlier.  
@@ -277,4 +277,4 @@ Lets remove the s3 objects, s3 bucket and AWS Lambda `s3ObjectListenerLambda`.
 
 🏁 **Congrats !** You learnt a key integration between AWS Lambda and S3. 🏁
 
-**Next**: [Integrate with Kinesis](10-integrate-with-kinesis.md) 
+**Next**: [Integrate with Kinesis](11-integrate-with-kinesis.md) 

@@ -1,7 +1,7 @@
 # Serverless Introduction
 This section is an introduction to serverless computing. 
 > Note: If you are more interested in 'hands-on' part, you can skip this section and go directly to
-[Prerequisites and Setup](01-aws-cli-installation.md)  
+[Prerequisites and Setup](02-aws-cli-installation.md)  
 
 Serverless computing has become a mainstream architectural option for building software today. 
 Many large organisations have started adopting serverless seriously in large scale applications. 
@@ -30,4 +30,4 @@ consume events from a queue or run on a schedule. Lambda also provides 'serverle
 
 AWS Lambda has much more features offered and you will find the following tutorials covering all these.
 
-**Let's Start Coding** [Prerequisites and Setup](01-aws-cli-installation.md)
+**Let's Start Coding** [Prerequisites and Setup](02-aws-cli-installation.md)

@@ -250,4 +250,4 @@ Lets remove the DynamoDB table as it will not be used further.
 
 🏁 **Congrats !** You learnt a key integration between AWS Lambda and DynamoDB 🏁
 
-**Next**: [Integrate with APIGateway](12-integrate-with-api-gateway.md) 
+**Next**: [Integrate with APIGateway](13-integrate-with-api-gateway.md) 

@@ -82,4 +82,4 @@ Lets remove the `formatCurrencyLambda` Lambda created above.
 
 🏁 **Congrats !** You deployed your first AWS Lambda function with its dependencies and invoked it successfully. 🏁
 
-**Next**: [Lambda Layers](06-lambda-layers.md)
+**Next**: [Lambda Layers](07-lambda-layers.md)

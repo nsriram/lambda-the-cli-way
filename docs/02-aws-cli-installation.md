@@ -38,4 +38,4 @@ this tutorial using this approach. At th end of the tutorial the credentials wil
 
 🏁 **Congrats !** You got your AWS CLI Setup completed 🏁
 
-**Next**: [IAM Account For Tutorial](02-iam-account-setup.md)
+**Next**: [IAM Account For Tutorial](03-iam-account-setup.md)
