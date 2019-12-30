@@ -325,6 +325,6 @@ Lets remove the API gateway resources we created and also the permission provide
     --profile "$AWS_PROFILE"
 ```
 
-🏁 **Congrats !** You learnt a key integration between AWS Lambda and Amazon API gateway🏁
+🏁 **Congrats !** You learnt a key integration between AWS Lambda and Amazon API gateway 🏁
 
-**Next**: [SAM CLI](13-sam-cli.md) 
+**Next**: [Serverless Application Model (SAM)](13-sam-cli.md) 
