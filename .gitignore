@@ -1,4 +1,7 @@
 .DS_Store
 .idea
 foo.json
+samples/05/format-currency-lambda/node_modules
+samples/06/momentjs-lambda-layer/node_modules
+samples/06/momentjs-lambda-layer/dist
 samples/09/s3-event-listener-lambda/node_modules
