@@ -32,9 +32,9 @@ secret_key     ****************aBcd shared-credentials-file
     The `[default]` profile entry here will be used by AWS CLI, for executing the commands. 
 - `~/.aws/credentials` is a file where the `aws_access_key_id` and `aws_secret_access_key` of the profiles can be specified. 
 
-**Note**: `aws_secret_access_key` is mentioned in plain text in ~/.aws/credentials file. This is not recommended for 
+**Note**: `aws_secret_access_key` is mentioned in plain text in `~/.aws/credentials file`. This is not recommended for 
 security reasons, if you are on a shared laptop or feel, the file can be accessed by others. But, we will proceed with 
-this tutorial using this approach. At th end of the tutorial the credentials will be removed. 
+this tutorial using this approach. At the end of the tutorial the credentials will be removed. 
 
 🏁 **Congrats !** You got your AWS CLI Setup completed 🏁
 
