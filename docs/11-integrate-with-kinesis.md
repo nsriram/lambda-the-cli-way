@@ -113,7 +113,7 @@ Stream records read from Kinesis, by Lambda, will have the format mentioned belo
 ```
 ➜ mkdir kinesis-event-logger-lambda
 ➜ cd kinesis-event-logger-lambda
-➜ echo "exports.handler =  async (event, context, callback) => {
+➜ echo "exports.handler =  async (event, context) => {
   event.Records.forEach(record => console.log(Buffer.from(record.kinesis.data, 'base64').toString('utf8')));
 };" > kinesisEventLogger.js
 ```

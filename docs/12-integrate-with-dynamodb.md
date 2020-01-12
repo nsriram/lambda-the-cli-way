@@ -131,7 +131,7 @@ StreamViewType, the `Records.dynamodb.Keys` will only have the `Keys`. The dynam
 ```shell script
 ➜ mkdir dynamodb-event-logger-lambda
 ➜ cd dynamodb-event-logger-lambda
-➜ echo "exports.handler =  async (event, context, callback) => {
+➜ echo "exports.handler =  async (event, context) => {
   event.Records.forEach(record => console.log(record.dynamodb.Keys));
 };" > dynamoDBEventLogger.js
 ```

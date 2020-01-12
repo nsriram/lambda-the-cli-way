@@ -75,7 +75,7 @@ will also be sent back to the lambda. These are ignored.
 ➜  echo "const AWS = require('aws-sdk');
          const s3 = new AWS.S3();
          
-         exports.handler = async (event, context, callback) => {
+         exports.handler = (event, context, callback) => {
            const uploadedObject = event.Records[0].s3.object;
            const objectKey = uploadedObject.key;
            if (\!objectKey.includes('metadata.txt')) {
